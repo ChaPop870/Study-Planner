@@ -19,6 +19,7 @@ Each row in the CSV file represents one scheduled course session. The required c
 | ------------------- | ------------------------------------------------ |
 | **course_name**     | The name/title of the course                     |
 | **credits**         | Number of credit hours                           |
+| **day**             | Start day (Sunday, Monday, ... , Saturday)       |
 | **start_time**      | Start time (e.g., `2025-04-15 10:00`)            |
 | **duration**        | Duration (TimeDelta)                             |
 | **room**            | Room or lecture hall                             |
