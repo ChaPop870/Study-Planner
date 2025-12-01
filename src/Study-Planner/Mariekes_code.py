@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import pathlib
+from pathlib import Path
 import datetime as dt
 
 
