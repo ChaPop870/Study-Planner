@@ -5,7 +5,7 @@ This project aims to create study planner for students. It will allow students t
 
 ## Project Scope and Goals
 1. Parse a user-created csv file and use the data to create a structured timetable.
-2. Create the schedule from user-generated input.
+2. Create the schedule from user-generated input. cake
 3. Scrape UHH website to create the timetable automatically.
 4. Create a timetable for specific classrooms to determine their availability for students who wish to use them for studying.
 
