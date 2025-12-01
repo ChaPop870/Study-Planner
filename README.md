@@ -15,6 +15,7 @@ In this case, the user will populate a csv file with the information for their c
 ## 2. Using a link from STiNE
 In this case, the user will provide a link to the page which contains their courses. The get to this page, students must log into STiNE, navigate to Studying and click on Courses. This hyperlink will then be the input for the study planner. A screenshot of this page is provided below.
 ![img.png](img.png)
+In the future, we can likely automate the fetching of this link.
 
 ### CSV Structure
 Each row in the CSV file represents one scheduled course session. The required columns
