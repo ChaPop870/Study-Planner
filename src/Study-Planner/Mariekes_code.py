@@ -26,6 +26,7 @@ df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
 df["duration"] = pd.to_timedelta(df["duration"], unit="minutes")
 df["end_time"] = df["start_time"] + df["duration"]
 
+# Period to create timetable display
 period = Rectangle(
     xy=(df["day"], df["start_time"]),
     width=df["day"],
