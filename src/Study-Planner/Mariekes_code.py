@@ -1,6 +1,7 @@
 # Imports
 import datetime as dt
 import matplotlib.dates as mdates
+from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
