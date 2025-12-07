@@ -36,6 +36,18 @@ period = Rectangle(
 
 # Plot
 fig, ax = plt.subplots(figsize=(8, 6))
+# for subject, row in df.iterrows():
+#     x = row["day"]
+#     y = row["start_time"]
+#     width = row["day"]
+#     height = row["duration"]
+#
+#     period = Rectangle(
+#         xy=(x, y),
+#         width=width,
+#         height=height
+#     )
+#     ax.add_patch(period)
 ax.set_title(f"{user}'s Study Timetable")
 ax.xaxis.tick_top()
 ax.set_xticks(ticks=np.arange(0, len(WEEK_DAYS)), labels=WEEK_DAYS)
