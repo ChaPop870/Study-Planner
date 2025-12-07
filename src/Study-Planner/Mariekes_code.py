@@ -21,7 +21,7 @@ user = "Chavez"
 
 df = pd.read_csv(file).set_index("course_name")
 
-# Format dataframe columns into datetime and timedelta objects
+# Prepare the data
 df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
 df["duration"] = pd.to_timedelta(df["duration"], unit="minutes")
 df["end_time"] = df["start_time"] + df["duration"]
@@ -41,10 +41,10 @@ ax.set_xticks(ticks=np.arange(0, len(WEEK_DAYS)), labels=WEEK_DAYS)
 ax.set_xlim(- 0.5, len(WEEK_DAYS) - 0.5)
 ax.set_xticklabels(WEEK_DAYS)
 ax.set_xlabel("Week Day")
-ax.set_xticks(ticks=np.arange(0, len(WEEK_DAYS)), labels=WEEK_DAYS)
 ax.invert_yaxis()
 ax.yaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
 ax.yaxis.set_major_locator(mdates.HourLocator(byhour=np.arange(1, 24, 2)))
+ax.yaxis.set_minor_locator(mdates.MinuteLocator(interval=30))
 ax.set_ylabel("Hour")
 # ax.set_yticks(HOURS)
 
