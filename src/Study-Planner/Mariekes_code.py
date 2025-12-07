@@ -1,5 +1,6 @@
 # Imports
 import datetime as dt
+import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -25,8 +26,10 @@ ax.xaxis.tick_top()
 ax.set_xlabel("Week Day")
 ax.set_xticks(ticks=np.arange(0, len(WEEK_DAYS)), labels=WEEK_DAYS)
 ax.invert_yaxis()
+ax.yaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
+ax.yaxis.set_major_locator(mdates.HourLocator(byhour=np.arange(1, 24, 2)))
 ax.set_ylabel("Hour")
-ax.set_yticks(HOURS)
+# ax.set_yticks(HOURS)
 
 plt.show()
 
