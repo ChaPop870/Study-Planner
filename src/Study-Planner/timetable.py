@@ -45,6 +45,14 @@ df["height"] = df["end_num"] - df["start_num"]
 # Set up the figure and axes
 fig, ax = plt.subplots(figsize=(9, 6))
 
+# Horizontal grid
+ax.set_axisbelow(True)
+ax.grid(which='major', axis="y", alpha=0.5)
+
+# Vertical grid
+for x in range(len(WEEK_DAYS) + 1):
+    ax.axvline(x = x - 0.5, color="gray", alpha=0.3)
+
 # Loop through the CSV file and generate rectangles
 for course, row in df.iterrows():
     rect = Rectangle(
