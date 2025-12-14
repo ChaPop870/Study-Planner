@@ -56,7 +56,7 @@ for course, row in df.iterrows():
     )
     ax.add_patch(rect)
 
-ax.set_title(f"{user}'s Study Timetable")
+# X-axis formatting
 ax.xaxis.tick_top()
 ax.set_xticks(ticks=np.arange(0, len(WEEK_DAYS)), labels=WEEK_DAYS)
 ax.set_xlim(- 0.5, len(WEEK_DAYS) - 0.5)
