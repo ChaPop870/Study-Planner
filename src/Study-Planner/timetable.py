@@ -25,6 +25,10 @@ df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
 df["duration"] = pd.to_timedelta(df["duration"], unit="minutes")
 df["end_time"] = df["start_time"] + df["duration"]
 
+# Map week days to x-axis
+day_to_x = {day: i for i, day in enumerate(WEEK_DAYS)}
+df["x"] = df["day"].map(day_to_x)
+
 # Period to create timetable display
 # period = Rectangle(
 #     xy=(df["day"], df["start_time"]),
