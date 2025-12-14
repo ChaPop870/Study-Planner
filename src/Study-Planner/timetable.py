@@ -64,10 +64,11 @@ ax.set_xticklabels(WEEK_DAYS)
 ax.set_xlabel("Week Day")
 ax.invert_yaxis()
 # Force limits to one day to avoid autoscale issues
-day_start = mdates.date2num(df["start_time"].min().normalize())
-day_end   = day_start + 1
-
-ax.set_ylim(day_end, day_start)
+pad_hours = 1
+pad = pad_hours / 24
+y_min = df["start_num"].min() - pad
+y_max = df["end_num"].max() + pad
+ax.set_ylim(y_max, y_min)
 ax.yaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
 ax.yaxis.set_major_locator(mdates.HourLocator(byhour=np.arange(1, 24, 2)))
 ax.yaxis.set_minor_locator(mdates.MinuteLocator(interval=30))
