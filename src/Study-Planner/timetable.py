@@ -29,6 +29,11 @@ df["end_time"] = df["start_time"] + df["duration"]
 day_to_x = {day: i for i, day in enumerate(WEEK_DAYS)}
 df["x"] = df["day"].map(day_to_x)
 
+# Convert times to Matplotlib numeric date format
+df["start_num"] = mdates.date2num(df['start_time'])
+df["end_num"] = mdates.date2num(df['end_time'])
+df["height"] = df["end_num"] - df["start_num"]
+
 # Period to create timetable display
 # period = Rectangle(
 #     xy=(df["day"], df["start_time"]),
