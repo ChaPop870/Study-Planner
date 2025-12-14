@@ -73,7 +73,17 @@ ax.yaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
 ax.yaxis.set_major_locator(mdates.HourLocator(byhour=np.arange(1, 24, 2)))
 ax.yaxis.set_minor_locator(mdates.MinuteLocator(interval=30))
 ax.set_ylabel("Hour")
-# ax.set_yticks(HOURS)
+
+# Set Title below
+fig.text(
+    x=0.5,        # centered horizontally
+    y=0.02,       # near the bottom of the figure
+    s=f"{user}'s Study Timetable",
+    ha="center",
+    va="bottom",
+    fontsize=14,
+    weight="bold"
+)
 
 plt.show()
 
