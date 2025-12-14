@@ -48,7 +48,7 @@ fig, ax = plt.subplots(figsize=(9, 6))
 # Loop through the CSV file and generate rectangles
 for course, row in df.iterrows():
     rect = Rectangle(
-        xy = (row['x'], row['start_num']),
+        xy = (row['x'] - 0.4, row['start_num']),
         width = 0.8,
         height = row['height'],
         facecolor = 'steelblue',
