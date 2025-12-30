@@ -20,7 +20,14 @@ file = DATA_DIR / "planner_template - chavez_pope.csv"
 
 filename: str = "planner_template - chavez_pope.csv"
 
-df = pd.read_csv(file).set_index("course_name")
+def load_course_data(file: str) -> pd.DataFrame:
+    """Load course data from csv file in a padas dataframe"""
+    file = DATA_DIR / filename
+    df = pd.read_csv(file).set_index("course_name")
+    return df
+
+
+df = load_course_data(filename)
 
 # Prepare the data
 df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
