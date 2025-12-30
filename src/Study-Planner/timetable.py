@@ -1,5 +1,5 @@
 # Imports
-from datetime import datetime, timedelta
+from datetime import datetime, time, timedelta
 import matplotlib.colors as mcolors
 import matplotlib.dates as mdates
 from matplotlib.patches import Rectangle
@@ -28,7 +28,18 @@ df["end_time"] = df["start_time"] + df["duration"]
 
 
 class Course:
-    def __init__(self, name, credits, day, start_time, duration, room, lecturer, color, figsize_timetable):
+    def __init__(self,
+        name: str,
+        credits: int,
+        day: str,
+        start_time: time,
+        duration: timedelta,
+        room: str,
+        lecturer: str,
+        color: str,
+        figsize_timetable
+    ) -> None:
+
         self.name = name
         self.credits = credits
         self.day = day
