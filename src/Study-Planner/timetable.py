@@ -32,7 +32,7 @@ df["end_time"] = df["start_time"] + df["duration"]
 
 
 class Course:
-    def __init__(self, name, credits, day, starttime, duration, room, lecturer, color, figsize_timetable):
+    def __init__(self, name, credits, day, start_time, duration, room, lecturer, color, figsize_timetable):
         self.name = name
         self.credits = credits
         self.day = day
