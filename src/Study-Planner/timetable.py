@@ -18,7 +18,7 @@ DATA_DIR: Path = BASE_DIR / "data"
 
 file = DATA_DIR / "planner_template - chavez_pope.csv"
 
-#user = "Chavez"
+filename: str = "planner_template - chavez_pope.csv"
 
 df = pd.read_csv(file).set_index("course_name")
 
