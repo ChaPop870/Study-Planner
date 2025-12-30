@@ -4,13 +4,9 @@ import matplotlib.colors as mcolors
 import matplotlib.dates as mdates
 from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
 import numpy as np
 import pandas as pd
 from pathlib import Path
-import matplotlib.dates as mdates
-from datetime import datetime, timedelta
-import matplotlib.colors as mcolors
 
 
 # Load File
@@ -49,19 +45,18 @@ class Course:
         self.x = day_to_x[day]
 
 
-
 class Display():
     def __init__(self, courses):
         self.courses = courses
 
-    def static(self, themecolor, figsize_timetable, user):
+    def static(self, theme_color, figsize_timetable, user):
         # prepare dynamic y-axis
         earliest_time = datetime(year = 1900, month = 1, day = 2, hour = 0, minute = 0)
         latest_time = datetime(year = 1900, month = 1, day = 1, hour = 0, minute = 0)
 
         for subject in self.courses:
-            if subject.starttime < earliest_time:
-                earliest_time = subject.starttime
+            if subject.start_time < earliest_time:
+                earliest_time = subject.start_time
             if subject.endtime > latest_time:
                 latest_time = subject.endtime
 
@@ -79,7 +74,7 @@ class Display():
         # ax1 for days
         ax1 = fig.add_subplot(gs[0])
         for i in range(len(WEEK_DAYS)):
-            rec = Rectangle( (i * day_width, 0), day_width, 1, edgecolor="black", facecolor=themecolor)
+            rec = Rectangle((i * day_width, 0), day_width, 1, edgecolor="black", facecolor=theme_color)
             ax1.add_patch(rec)
 
             ax1.text(i * day_width + text_offset[0], text_offset[1], f"{WEEK_DAYS[i]}", ha="center", va="center", fontsize=12)
@@ -87,7 +82,7 @@ class Display():
         ax1.set_xlim(0, figsize_timetable[0])
         ax1.set_ylim(0,1)
         ax1.axis("off")
-        ax1.set_title(f"{user}'s Study Timetable \n", fontsize = 16, color = themecolor, fontweight = "bold")
+        ax1.set_title(f"{user}'s Study Timetable \n", fontsize = 16, color = theme_color, fontweight ="bold")
 
         # ax2 for actual timetable
         ax2 = fig.add_subplot(gs[1], sharex = ax1)
