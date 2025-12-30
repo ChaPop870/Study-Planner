@@ -42,10 +42,10 @@ class Course:
         self.lecturer = lecturer
         self.color = color
 
-        self.endtime = starttime + duration
-        self.y = starttime.hour * 60 + starttime.minute
-        daylines = [i * figsize_timetable[0] / len(WEEK_DAYS) for i, day in enumerate(WEEK_DAYS)]
-        day_to_x = {day: daylines[i] for i, day in enumerate(WEEK_DAYS)}
+        self.endtime = start_time + duration
+        self.y = start_time.hour * 60 + start_time.minute
+        day_lines = [i * figsize_timetable[0] / len(WEEK_DAYS) for i, day in enumerate(WEEK_DAYS)]
+        day_to_x = {day: day_lines[i] for i, day in enumerate(WEEK_DAYS)}
         self.x = day_to_x[day]
 
 
