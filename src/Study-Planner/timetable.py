@@ -143,12 +143,18 @@ class Display():
         plt.show()
 
 
-courses = []
-colors = list(mcolors.CSS4_COLORS)
-figsize_timetable = [8,6]
-for i, (subject, row) in enumerate(df.iterrows()):
-    course = Course(subject, row["credits"], row["day"], row["start_time"], row["duration"], row["room"], row["lecturer"], colors[i+i*7], figsize_timetable)
-    courses.append(course)
+def main():
+    df = load_course_data(filename)
+    df = prepare_df(df)
+    user = "Marieke"
+    courses = []
+    colors = list(mcolors.CSS4_COLORS)
+    figsize_timetable = [8, 6]
+
+    for i, (subject, row) in enumerate(df.iterrows()):
+        course = Course(subject, row["credits"], row["day"], row["start_time"], row["duration"], row["room"],
+                        row["lecturer"], colors[i + i * 7], figsize_timetable)
+        courses.append(course)
 
 plot = Display(courses)
 plot.static("skyblue", figsize_timetable, "Marieke")
