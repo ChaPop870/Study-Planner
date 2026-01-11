@@ -1,4 +1,5 @@
 # Imports
+from abc import ABC, abstractmethod
 from datetime import datetime, time, timedelta
 import matplotlib.colors as mcolors
 import matplotlib.dates as mdates
