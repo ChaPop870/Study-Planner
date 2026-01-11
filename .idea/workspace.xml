@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c7cc013f-f2c1-4c65-94d5-7678f5d127c6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Study-Planner/timetable.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/Study-Planner/timetable.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="empty_base" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ChaPop870&quot;
+  }
+}</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="plotly" />
+                    <option name="lastUsedInstant" value="1767634687" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="Mariekes_branch" />
+                    <option name="lastUsedInstant" value="1767126393" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1766003502" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="chavez-contribution" />
+                    <option name="lastUsedInstant" value="1765818351" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="Chavez-Contribution" />
+                    <option name="lastUsedInstant" value="1764888288" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/ChaPop870/Study-Planner.git&quot;,
+    &quot;accountId&quot;: &quot;1cc3d059-da67-4e22-8f3e-ad01ccaf3e45&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="36Ft1rcGigj8UFbuhI9UlDXz0Gt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.Mariekes_code.executor&quot;: &quot;Run&quot;,
+    &quot;Python.timetable.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#2 on plotly&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.General&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="timetable" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Study Planner" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.13 (Study Planner)" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/Study-Planner" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\cpope\PycharmProjects\Study Planner\src\Study-Planner\timetable.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-PY-252.27397.106" />
+        <option value="bundled-python-sdk-4e2b1448bda8-9a97661f3031-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.27397.106" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c7cc013f-f2c1-4c65-94d5-7678f5d127c6" name="Changes" comment="" />
+      <created>1764613934393</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1764613934393</updated>
+      <workItem from="1764613936040" duration="6625000" />
+      <workItem from="1764881501351" duration="1624000" />
+      <workItem from="1764887435634" duration="1048000" />
+      <workItem from="1764889605742" duration="10767000" />
+      <workItem from="1765114298344" duration="14142000" />
+      <workItem from="1765130915122" duration="11447000" />
+      <workItem from="1765738490328" duration="9496000" />
+      <workItem from="1765810090900" duration="10207000" />
+      <workItem from="1767098111385" duration="13615000" />
+      <workItem from="1767629241604" duration="2136000" />
+      <workItem from="1767632999247" duration="3628000" />
+      <workItem from="1768143972956" duration="374000" />
+    </task>
+    <task id="LOCAL-00005" summary="Adjusted the time description for start_time in README.md.">
+      <option name="closed" value="true" />
+      <created>1764630021625</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764630021625</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Rearranged the imports to match PEP8 format.&#10;Change pathlib.Path to Path.">
+      <option name="closed" value="true" />
+      <created>1764889879562</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764889879562</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Created a rough outline of the shell of the timetable using Pyplot.">
+      <option name="closed" value="true" />
+      <created>1764896427564</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1764896427564</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Imported matplotlib.dates as mdates and used it to format the y-axis in the datetime format.">
+      <option name="closed" value="true" />
+      <created>1765116394854</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1765116394854</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added and Ideas section to the bottom of the ReadME.&#10;&#10;Idea: Create TimeTable class">
+      <option name="closed" value="true" />
+      <created>1765116716788</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1765116716788</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Idea: Enclose days on the timetable in a table for aesthetics.">
+      <option name="closed" value="true" />
+      <created>1765118521815</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1765118521815</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Formatted the x-axis for the timetable.">
+      <option name="closed" value="true" />
+      <created>1765119218786</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1765119218786</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added rectangle to put timemtable blocks.">
+      <option name="closed" value="true" />
+      <created>1765119379445</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1765119379445</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Additional imports made and axes formatting.">
+      <option name="closed" value="true" />
+      <created>1765119407291</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1765119407291</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Format start_time column into a datetime objects, duration into a timedelta objects, and calculate end_time and insert it as a new column in the dataframe.">
+      <option name="closed" value="true" />
+      <created>1765122459003</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1765122459003</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Rectangles to display a period from dataframe. Will need to loop over code. This logic is coming soon.">
+      <option name="closed" value="true" />
+      <created>1765125142557</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1765125142557</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Additional imports made and axes formatting.">
+      <option name="closed" value="true" />
+      <created>1765125162871</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1765125162871</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Added logic to begin displaying things on the timetable.">
+      <option name="closed" value="true" />
+      <created>1765125296596</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1765125296596</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Attempting to build the rectangles. Not working as yet. Could be issue with datatypes and mdates.">
+      <option name="closed" value="true" />
+      <created>1765131365872</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1765131365872</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added logic to begin displaying things on the timetable.">
+      <option name="closed" value="true" />
+      <created>1765208705162</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1765208705163</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Added logic to begin displaying things on the timetable.">
+      <option name="closed" value="true" />
+      <created>1765233576018</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1765233576018</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Renamed the main python file to timetable.py.">
+      <option name="closed" value="true" />
+      <created>1765234235589</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1765234235589</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Map weekdays to an integer and add it to a new column in df.">
+      <option name="closed" value="true" />
+      <created>1765740672114</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1765740672114</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Converted the times to a Matplotlib numeric date format for later use in the rectangles.">
+      <option name="closed" value="true" />
+      <created>1765740986270</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1765740986270</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Set up the rectangles for the timetable and add to the figure row-by-row.">
+      <option name="closed" value="true" />
+      <created>1765741974156</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1765741974156</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Format y-axis so that the rectangles use the mdates scale.">
+      <option name="closed" value="true" />
+      <created>1765742159443</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1765742159443</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Subtracted 0.4 to center the rectangle on the day tick.">
+      <option name="closed" value="true" />
+      <created>1765742826579</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1765742826579</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Successfully got the rectangles working with the y-axis and added a 1 hour pad so that the timetable is more zoomed in to the relevant hours.">
+      <option name="closed" value="true" />
+      <created>1765743180055</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1765743180055</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Ideas for user-created timetable and adding text to rectangles.">
+      <option name="closed" value="true" />
+      <created>1765744693693</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1765744693693</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Shifted the title of the figure to below the plot using fig.text()">
+      <option name="closed" value="true" />
+      <created>1765745415882</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1765745415882</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Added a box around the xtick labels.">
+      <option name="closed" value="true" />
+      <created>1765745446319</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1765745446319</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Removed the weekday x label.">
+      <option name="closed" value="true" />
+      <created>1765745466945</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1765745466945</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Removed the title from the top">
+      <option name="closed" value="true" />
+      <created>1765745508231</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1765745508231</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Added horizontal and vertical gridlines.">
+      <option name="closed" value="true" />
+      <created>1765746715830</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1765746715830</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Updated timetable with working rectangles and some aesthetic tweaks.">
+      <option name="closed" value="true" />
+      <created>1765746841325</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1765746841325</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Pushed my working timetable prototype back to main.">
+      <option name="closed" value="true" />
+      <created>1766003427410</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1766003427410</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Alphabetized the imports to meet PEP8 standard.">
+      <option name="closed" value="true" />
+      <created>1767098464417</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1767098464417</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Changed variable names to snake_case">
+      <option name="closed" value="true" />
+      <created>1767099336226</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1767099336226</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Used snake case variable naming convention.">
+      <option name="closed" value="true" />
+      <created>1767099375716</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1767099375716</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Used snake_case variable convention">
+      <option name="closed" value="true" />
+      <created>1767099400621</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1767099400621</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Renamed variables to match snake case convention and reordered the imports in alphabetical order to fit the PEP8 standard.">
+      <option name="closed" value="true" />
+      <created>1767099606733</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1767099606733</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Added type annotations to the Course class">
+      <option name="closed" value="true" />
+      <created>1767102373789</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1767102373789</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Placed the paths into a constants block.">
+      <option name="closed" value="true" />
+      <created>1767128039769</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1767128039769</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Renamed file to filename">
+      <option name="closed" value="true" />
+      <created>1767128068306</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1767128068306</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Created a function that loads the course data into a pandas dataframe.">
+      <option name="closed" value="true" />
+      <created>1767128098746</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1767128098746</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Extracted a method for the prepare the data block">
+      <option name="closed" value="true" />
+      <created>1767128448330</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1767128448330</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Added df = data.copy() so that I can remove global df from the main() function.">
+      <option name="closed" value="true" />
+      <created>1767129099752</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1767129099752</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Added main() function using rector method. Removed global df from main().">
+      <option name="closed" value="true" />
+      <created>1767129168199</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1767129168199</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Added __name__ == '__main__'">
+      <option name="closed" value="true" />
+      <created>1767129215632</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1767129215632</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Began the plotly integration.">
+      <option name="closed" value="true" />
+      <created>1767184145721</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1767184145721</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Committing .ipynb file.">
+      <option name="closed" value="true" />
+      <created>1767632759677</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1767632759677</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Alphabetized the imports">
+      <option name="closed" value="true" />
+      <created>1768144878928</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1768144878928</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Moved built in modules to the top according to PEP8">
+      <option name="closed" value="true" />
+      <created>1768145125313</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1768145125313</updated>
+    </task>
+    <task id="LOCAL-00053" summary="PEP8 spacing">
+      <option name="closed" value="true" />
+      <created>1768145181189</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1768145181189</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Shifted the title of the figure to below the plot using fig.text()" />
+    <MESSAGE value="Added a box around the xtick labels." />
+    <MESSAGE value="Removed the weekday x label." />
+    <MESSAGE value="Removed the title from the top" />
+    <MESSAGE value="Added horizontal and vertical gridlines." />
+    <MESSAGE value="Updated timetable with working rectangles and some aesthetic tweaks." />
+    <MESSAGE value="Pushed my working timetable prototype back to main." />
+    <MESSAGE value="Alphabetized the imports to meet PEP8 standard." />
+    <MESSAGE value="Changed variable names to snake_case" />
+    <MESSAGE value="Used snake case variable naming convention." />
+    <MESSAGE value="Used snake_case variable convention" />
+    <MESSAGE value="Renamed variables to match snake case convention and reordered the imports in alphabetical order to fit the PEP8 standard." />
+    <MESSAGE value="Added type annotations to the Course class" />
+    <MESSAGE value="Placed the paths into a constants block." />
+    <MESSAGE value="Renamed file to filename" />
+    <MESSAGE value="Created a function that loads the course data into a pandas dataframe." />
+    <MESSAGE value="Extracted a method for the prepare the data block" />
+    <MESSAGE value="Added df = data.copy() so that I can remove global df from the main() function." />
+    <MESSAGE value="Added main() function using rector method. Removed global df from main()." />
+    <MESSAGE value="Added __name__ == '__main__'" />
+    <MESSAGE value="Began the plotly integration." />
+    <MESSAGE value="Committing .ipynb file." />
+    <MESSAGE value="Alphabetized the imports" />
+    <MESSAGE value="Moved built in modules to the top according to PEP8" />
+    <MESSAGE value="PEP8 spacing" />
+    <option name="LAST_COMMIT_MESSAGE" value="PEP8 spacing" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../Study-Planner/src/Study-Planner/Mariekes_code.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Study_Planner$Mariekes_code.coverage" NAME="Mariekes_code Coverage Results" MODIFIED="1765214331246" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Study-Planner" />
+    <SUITE FILE_PATH="coverage/Study_Planner$timetable.coverage" NAME="timetable Coverage Results" MODIFIED="1768146112652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/Study-Planner" />
+  </component>
+</project>
