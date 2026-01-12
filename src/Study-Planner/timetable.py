@@ -12,13 +12,12 @@ from pathlib import Path
 BASE_DIR: Path = Path(__file__).resolve().parents[2]
 DATA_DIR: Path = BASE_DIR / "data"
 WEEK_DAYS: list[str] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-# HOURS = np.arange(0, 24)
+HOURS = np.arange(0, 24)
 
 file = DATA_DIR / "planner_template - chavez_pope.csv"
 
 user = "Chavez"
 
-# Load the dataframe
 df = pd.read_csv(file).set_index("course_name")
 
 # Prepare the data
@@ -26,72 +25,48 @@ df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
 df["duration"] = pd.to_timedelta(df["duration"], unit="minutes")
 df["end_time"] = df["start_time"] + df["duration"]
 
-# Map week days to x-axis
-day_to_x = {day: i for i, day in enumerate(WEEK_DAYS)}
-df["x"] = df["day"].map(day_to_x)
+# Period to create timetable display
+# period = Rectangle(
+#     xy=(df["day"], df["start_time"]),
+#     width=df["day"],
+#     height=df["duration"]
+# )
 
-# Convert times to Matplotlib numeric date format
-df["start_num"] = mdates.date2num(df['start_time'])
-df["end_num"] = mdates.date2num(df['end_time'])
-df["height"] = df["end_num"] - df["start_num"]
 
-# Set up the figure and axes
-fig, ax = plt.subplots(figsize=(9, 6))
-
-# Horizontal grid
-ax.set_axisbelow(True)
-ax.grid(which='major', axis="y", alpha=0.5)
-
-# Vertical grid
-for x in range(len(WEEK_DAYS) + 1):
-    ax.axvline(x = x - 0.5, color="gray", alpha=0.3)
-
-# Loop through the CSV file and generate rectangles
-for course, row in df.iterrows():
-    rect = Rectangle(
-        xy = (row['x'] - 0.4, row['start_num']),
-        width = 0.8,
-        height = row['height'],
-        facecolor = 'steelblue',
-        edgecolor = 'black'
-    )
-    ax.add_patch(rect)
-
-# X-axis formatting
+# Plot
+fig, ax = plt.subplots(figsize=(8, 6))
+# for subject, row in df.iterrows():
+#     x = row["day"]
+#     y = row["start_time"]
+#     width = row["day"]
+#     height = row["duration"]
+#
+#     period = Rectangle(
+#         xy=(x, y),
+#         width=width,
+#         height=height
+#     )
+#     ax.add_patch(period)
+ax.set_title(f"{user}'s Study Timetable")
 ax.xaxis.tick_top()
 ax.set_xticks(ticks=np.arange(0, len(WEEK_DAYS)), labels=WEEK_DAYS)
 ax.set_xlim(- 0.5, len(WEEK_DAYS) - 0.5)
 ax.set_xticklabels(WEEK_DAYS)
-for label in ax.get_xticklabels():
-    label.set_bbox(dict(
-        facecolor="white",
-        edgecolor="black",
-        boxstyle="round,pad=0.25"
-    ))
-
-# Y-axis formatting
+ax.set_xlabel("Week Day")
 ax.invert_yaxis()
-
-# Force limits to one day to avoid autoscale issues
-pad_hours = 1
-pad = pad_hours / 24
-y_min = df["start_num"].min() - pad
-y_max = df["end_num"].max() + pad
-ax.set_ylim(y_max, y_min)
 ax.yaxis.set_major_formatter(mdates.DateFormatter("%H:%M"))
 ax.yaxis.set_major_locator(mdates.HourLocator(byhour=np.arange(1, 24, 2)))
 ax.yaxis.set_minor_locator(mdates.MinuteLocator(interval=30))
 ax.set_ylabel("Hour")
-
-# Set Title below
-fig.text(
-    x=0.5,        # centered horizontally
-    y=0.02,       # near the bottom of the figure
-    s=f"{user}'s Study Timetable",
-    ha="center",
-    va="bottom",
-    fontsize=14,
-    weight="bold"
-)
+# ax.set_yticks(HOURS)
 
 plt.show()
+
+# define times and days
+# start = dt.datetime(2025,1,1, 8,0)
+# datetime_vec = [start + i * dt.timedelta(minutes=15) for i in range(0,49)]  # quarter hour steps
+# time = [t.time() for t in datetime_vec]
+# print(time)
+# days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+# print(df)
+
