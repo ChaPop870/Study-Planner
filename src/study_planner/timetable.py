@@ -26,18 +26,15 @@ BASE_DIR = Path.cwd().parents[1]
 
 DATA_DIR: Path = BASE_DIR / "data"
 
-
-def initialize_inputs() -> dict:
-    """Initialize an empty dictionary to collect user inputs of course information"""
-    return {
-        "course_name": [],
-        "credits": [],
-        "day": [],
-        "start_time": [],
-        "duration": [],
-        "room": [],
-        "lecturer": []
-    }
+BLANK_INPUT_DICT = {
+    "course_name": [],
+    "credits": [],
+    "day": [],
+    "start_time": [],
+    "duration": [],
+    "room": [],
+    "lecturer": []
+}
 
 def get_user_inputs():
     """Collect one course entry from the user"""
