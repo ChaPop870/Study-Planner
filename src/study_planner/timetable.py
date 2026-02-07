@@ -4,7 +4,6 @@ from datetime import datetime, time, timedelta
 from pathlib import Path
 
 import matplotlib.colors as mcolors
-import matplotlib.dates as mdates
 from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
 import numpy as np
