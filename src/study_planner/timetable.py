@@ -36,7 +36,8 @@ BLANK_INPUT_DICT = {
     "lecturer": []
 }
 
-def get_user_inputs():
+
+def get_user_inputs() -> tuple[str, int, str, str, int, str, str]:
     """Collect one course entry from the user"""
     course = input("Enter course name: ")
     cred = int(input("Enter credits: "))
@@ -52,7 +53,7 @@ def get_user_inputs():
 def dict_from_user_input() -> dict:
     """Generates a dictionary from repeated user inputs"""
 
-    data = initialize_inputs()
+    data = BLANK_INPUT_DICT
 
     choice = "y"
     while choice.lower() == "y":
@@ -71,7 +72,7 @@ def dict_from_user_input() -> dict:
     return data
 
 
-def generate_csv(user_input: dict, name: str = "timetable.csv") -> pd.DataFrame:
+def generate_csv(user_input: dict, name: str = "timetable.csv") -> None:
     """Generates a csv file from the user's inputs"""
     df = pd.DataFrame(user_input)
     return df.to_csv(DATA_DIR / name, index=False)
@@ -389,5 +390,5 @@ if __name__ == "__main__":
         filename="planner_template - chavez_pope.csv",
         themecolor="skyblue",
         figsize_timetable=(8, 6),
-        user="Marieke",
+        user="Marieke"
     )
