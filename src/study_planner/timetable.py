@@ -40,10 +40,37 @@ BLANK_INPUT_DICT = {
 def get_user_inputs() -> tuple[str, int, str, str, int, str, str]:
     """Collect one course entry from the user"""
     course = input("Enter course name: ")
-    cred = int(input("Enter credits: "))
-    da = input("Enter day (Monday, Tuesday, etc): ").capitalize()
-    start = input("Enter start time (HH:mm): ")
-    dur = int(input("Enter duration (in minutes): "))
+
+    while True:
+        try:
+            cred = int(input("Enter credits: "))
+            break
+        except ValueError:
+            print("Invalid input; please enter an integer.")
+
+    while True:
+        try:
+            da = input("Enter day (Monday, Tuesday, etc): ").capitalize()
+            if da in WEEK_DAYS:
+                break
+        except:
+            print("Invalid input; please nter day (Monday, Tuesday, etc):")
+
+    while True:
+        start = input("Enter start time (HH:MM) in 24 hour format: ")
+        try:
+            valid = datetime.strptime(start, "%H:%M")
+            break
+        except ValueError:
+            print("Invalid time. Please enter time in HH:MM (24-hour format).")
+
+    while True:
+        try:
+            dur = int(input("Enter duration (in minutes): "))
+            break
+        except ValueError:
+            print("Invalid time. Please enter time in full minutes.")
+
     r = input("Enter room: ")
     lect = input("Enter lecturer: ")
 
