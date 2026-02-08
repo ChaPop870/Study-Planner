@@ -102,7 +102,14 @@ def dict_from_user_input() -> dict:
 def generate_csv(user_input: dict, name: str = "timetable.csv") -> None:
     """Generates a csv file from the user's inputs"""
     df = pd.DataFrame(user_input)
-    return df.to_csv(DATA_DIR / name, index=False)
+    choice = input("\n Would you like to name the csv file? (y/n): ").lower()
+    if choice == "y":
+        name = input("Enter name of csv file: ") + ".csv"
+        print(f"{name} was created.")
+        return df.to_csv(DATA_DIR / name, index=False)
+    else:
+        print(f"The file named {name} was automatically created.")
+        return df.to_csv(DATA_DIR / name, index=False)
 
 
 def load_course_data(file: str) -> pd.DataFrame:
