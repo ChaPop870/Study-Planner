@@ -387,7 +387,7 @@ def choose_layout(type) -> Timetable:
     raise ValueError(f"Unknown timetable type: {type}")
 
 
-def main(type, filename, themecolor, figsize_timetable, user):
+def main(type, filename, themecolor, figsize_timetable, user, generate=False):
     df = load_course_data(filename)
     df = prepare_df(df)
     courses = []
