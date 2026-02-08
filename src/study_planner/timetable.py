@@ -429,5 +429,6 @@ if __name__ == "__main__":
         filename="planner_template - chavez_pope.csv",
         themecolor="skyblue",
         figsize_timetable=(8, 6),
-        user="Marieke"
+        user="Marieke",
+        auto_generate=False
     )
