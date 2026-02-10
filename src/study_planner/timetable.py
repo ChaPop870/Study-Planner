@@ -54,8 +54,10 @@ def get_user_inputs() -> tuple[str, int, str, str, int, str, str]:
             da = input("Enter day (Monday, Tuesday, etc): ").capitalize()
             if da in WEEK_DAYS:
                 break
-        except:
-            print("Invalid input; please nter day (Monday, Tuesday, etc):")
+            else:
+                print("Invalid input. Please enter a valid day (Monday, Tuesday, etc).")
+        except ValueError:
+            print("Invalid input; please enter day (Monday, Tuesday, etc):")
 
     while True:
         start = input("Enter start time (HH:MM) in 24 hour format: ")
@@ -68,7 +70,12 @@ def get_user_inputs() -> tuple[str, int, str, str, int, str, str]:
     while True:
         try:
             dur = int(input("Enter duration (in minutes): "))
-            break
+            if dur <= 1440:
+                break
+            else:
+                print("Invalid input. Please enter a valid duration (in minutes). "
+                      "Maximum duration is one day (1440 minutes).")
+
         except ValueError:
             print("Invalid time. Please enter time in full minutes.")
 
