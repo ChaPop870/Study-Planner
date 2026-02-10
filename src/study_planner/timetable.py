@@ -25,7 +25,7 @@ print("base dir:" , BASE_DIR)
 
 DATA_DIR: Path = BASE_DIR / "data"
 
-BLANK_INPUT_DICT = {
+BLANK_INPUT_DICT: dict[str, list[str | int| str| str| int| str| str]] = {
     "course_name": [],
     "credits": [],
     "day": [],
@@ -123,8 +123,8 @@ def generate_csv(user_input: dict, name: str = "timetable.csv") -> Path:
 
 def load_course_data(file: str) -> pd.DataFrame:
     """Load course data from csv file in a padas dataframe"""
-    file = DATA_DIR / file
-    df = pd.read_csv(file).set_index("course_name")
+    filepath: Path = DATA_DIR / file
+    df = pd.read_csv(filepath).set_index("course_name")
     return df
 
 
@@ -142,7 +142,7 @@ class Course:
         name: str,
         credits: int,
         day: str,
-        start_time: time,
+        start_time: datetime,
         duration: timedelta,
         room: str,
         lecturer: str,
@@ -158,7 +158,7 @@ class Course:
         self.lecturer = lecturer
         self.color = color
 
-        self.endtime = start_time + duration
+        self.endtime = datetime.combine(datetime.today().date(), datetime.time(start_time)) + duration
         self.y = start_time.hour * 60 + start_time.minute # Any better name that self.y?
         day_to_x = {
             day: i * figsize_timetable[0] / len(WEEK_DAYS)
