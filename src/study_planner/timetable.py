@@ -21,7 +21,6 @@ WEEK_DAYS: list[str] = [
     "Saturday",
 ]
 BASE_DIR = Path(__file__).resolve().parents[2]
-print("base dir:" , BASE_DIR)
 
 DATA_DIR: Path = BASE_DIR / "data"
 
