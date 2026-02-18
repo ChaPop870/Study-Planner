@@ -57,3 +57,11 @@ We plan to support:
 Might be useful to say to use this input with that output.
 - Input adapters can return a list of courses
 - Ensure typing in main functions and other functions. Use MyPy to check code for typing options. It helps with handling of types. https://github.com/python/mypy
+
+# 13-02-26
+- Start time + Duration should be less than a full day. OR... if longer, print until the end of the day and no longer beyond with an associated warning.
+- In the creation of the plot, we have a 2 hour buffer. We should account for times beginning just after midnight and before midnight. If start time is less than buffer time, set start time to midnight, or end time to midnight. (Or rather, have the axis roll back into the previous day.)
+- Can we implement a decorator pattern? Is the adapter decorator pattern possible? Factory pattern.
+- Implement themes (about 5): Dark Mode, Light mode (Modern look) Lightwork, Warm Colors (Caribbean color theme), Cool colors, Nature (Green).
+- Interactivity with the interface. We can possibly add another parameter to main (bool) which takes the user through a routine OR generates a timetable immediately from the set parameters.
+- Testing.
