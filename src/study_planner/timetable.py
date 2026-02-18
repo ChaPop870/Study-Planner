@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 from datetime import datetime, time, timedelta
 from pathlib import Path
-
+import matplotlib.patheffects as pe
 import matplotlib.colors as mcolors
 from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
@@ -146,7 +146,6 @@ class Course:
         duration: timedelta,
         room: str,
         lecturer: str,
-        color: str,
         figsize_timetable,
     ) -> None:
         self.name = name
@@ -156,7 +155,6 @@ class Course:
         self.duration = duration
         self.room = room
         self.lecturer = lecturer
-        self.color = color
 
         self.endtime = datetime.combine(datetime.today().date(), datetime.time(start_time)) + duration
         self.y = start_time.hour * 60 + start_time.minute # Any better name that self.y?
@@ -167,14 +165,76 @@ class Course:
         self.x = day_to_x[day]
 
 
+class Theme(ABC):
+    @abstractmethod
+    def color_list(self, number_of_courses: int) -> list:
+        pass
+
+
+class DarkTheme(Theme):
+    def __init__(self):
+        self.cmap = plt.get_cmap("bone")
+        self.themecolor = "midnightblue"
+        self.fontcolor = "white"
+
+    def color_list(self, number_of_courses: int) -> list:
+        return [self.cmap(i) for i in np.linspace(0.1, 0.5, number_of_courses)]
+
+class LightTheme(Theme):
+    def __init__(self):
+        self.cmap = plt.get_cmap("Blues")
+        self.themecolor = "powderblue"
+        self.fontcolor = "black"
+
+    def color_list(self, number_of_courses: int) -> list:
+        return [self.cmap(i) for i in np.linspace(0.2, 0.6, number_of_courses)]
+
+class RainbowTheme(Theme):
+    def __init__(self):
+        self.cmap = plt.get_cmap("rainbow")
+        self.themecolor = "crimson"
+        self.fontcolor = "lightgrey"
+
+    def color_list(self, number_of_courses: int) -> list:
+        return [self.cmap(i) for i in np.linspace(0, 1, number_of_courses)]
+
+class AutumnTheme(Theme):
+    def __init__(self):
+        self.cmap = plt.get_cmap("autumn")
+        self.themecolor = "maroon"
+        self.fontcolor = "white"
+
+    def color_list(self, number_of_courses: int) -> list:
+        return [self.cmap(i) for i in np.linspace(0, 0.85, number_of_courses)]
+
+class NeutralTheme(Theme):
+    def __init__(self):
+        self.cmap = plt.get_cmap("copper")
+        self.themecolor = "tan"
+        self.fontcolor = "black"
+
+    def color_list(self, number_of_courses: int) -> list:
+        return [self.cmap(i) for i in np.linspace(0.25, 1, number_of_courses)]
+
+class NatureTheme(Theme):
+    def __init__(self):
+        self.cmap = plt.get_cmap("summer")
+        self.themecolor = "lightgreen"
+        self.fontcolor = "darkslategrey"
+
+    def color_list(self, number_of_courses: int) -> list:
+        return [self.cmap(i) for i in np.linspace(0, 1, number_of_courses)]
+
+
+
 class Timetable(ABC):
     @abstractmethod
-    def decorator(self, courses, themecolor, figsize_timetable, user):
+    def decorator(self, courses, theme, figsize_timetable, user):
         pass
 
 
 class StaticTimestable(Timetable):
-    def decorator(self, courses, themecolor, figsize_timetable, user):
+    def decorator(self, courses, theme, figsize_timetable, user):
         earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
         latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
 
@@ -205,8 +265,8 @@ class StaticTimestable(Timetable):
                 (i * day_width, 0),
                 day_width,
                 1,
-                edgecolor="black",
-                facecolor=themecolor,
+                edgecolor=theme.fontcolor,
+                facecolor=theme.themecolor,  # theme.color_list(len(courses))[0],
             )
             ax1.add_patch(rec)
 
@@ -222,12 +282,15 @@ class StaticTimestable(Timetable):
         ax1.set_xlim(0, figsize_timetable[0])
         ax1.set_ylim(0, 1)
         ax1.axis("off")
-        ax1.set_title(
+        title = ax1.set_title(
             f"{user}'s Study Timetable \n",
             fontsize=16,
-            color=themecolor,
+            color=theme.themecolor,  # theme.color_list(len(courses))[0],
             fontweight="bold",
         )
+        title.set_path_effects(
+            [pe.withStroke(linewidth=2, foreground=theme.fontcolor)
+             ])
 
         # ax2 for actual timetable
         ax2 = fig.add_subplot(gs[1], sharex=ax1)
@@ -241,33 +304,33 @@ class StaticTimestable(Timetable):
             i * figsize_timetable[0] / len(WEEK_DAYS) for i, day in enumerate(WEEK_DAYS)
         ]
         for x in daylines:
-            ax2.axvline(x, color="black", alpha=0.5)
+            ax2.axvline(x, color=theme.fontcolor, alpha=0.5)
 
-        # plotting the courses:
-        for subject in courses:
-            width = figsize_timetable[0] / len(WEEK_DAYS)  # One day wide
-            height = (subject.duration).total_seconds() / 60  # Duration in minutes
+            # plotting the courses:
+            for i_subject, subject in enumerate(courses):
+                width = figsize_timetable[0] / len(WEEK_DAYS)  # One day wide
+                height = (subject.duration).total_seconds() / 60  # Duration in minutes
 
-            period = Rectangle(
-                xy=(subject.x, subject.y),
-                width=width,
-                height=height,
-                facecolor=subject.color,
-                edgecolor="black",
-                label=subject.name,
-            )
-            ax2.add_patch(period)
-            ax2.text(
-                subject.x + width * 0.3, subject.y + height * 0.7, subject.name[0:6]
-            )
+                period = Rectangle(
+                    xy=(subject.x, subject.y),
+                    width=width,
+                    height=height,
+                    facecolor=theme.color_list(len(courses))[i_subject],
+                    edgecolor=theme.fontcolor,
+                    label=subject.name,
+                )
+                ax2.add_patch(period)
+                ax2.text(
+                    subject.x + width * 0.3, subject.y + height * 0.7, subject.name[0:6]
+                )
 
-        ax2.legend()
+            ax2.legend()
 
-        return fig.show()
+            return fig.show()
 
 
 class DynamicTimetable(Timetable):
-    def decorator(self, courses, themecolor, figsize_timetable, user):
+    def decorator(self, courses, theme, figsize_timetable, user):
         earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
         latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
 
@@ -291,6 +354,8 @@ class DynamicTimetable(Timetable):
             2, 1, shared_xaxes=True, vertical_spacing=0, row_heights=height_ratios
         )
         fig.update_layout(title=f"{user}'s Study Timetable")
+        fig.update_layout(title_font_color = mcolors.to_hex(theme.themecolor),
+                          title_font_shadow = "auto")
 
         # create the days as a header in subplot 1:
         for i in range(len(WEEK_DAYS)):
@@ -304,7 +369,7 @@ class DynamicTimetable(Timetable):
                 yref="y1",
                 row=1,
                 col=1,
-                fillcolor=themecolor,
+                fillcolor=mcolors.to_hex(theme.themecolor),
                 # opacity = 0.5
             )
 
@@ -315,6 +380,7 @@ class DynamicTimetable(Timetable):
                 showarrow=False,
                 col=1,
                 row=1,
+                font={"color": mcolors.to_hex(theme.fontcolor)},
             )
         fig.update_yaxes(range=[0, height_ratios[0]], visible=False, col=1, row=1)
 
@@ -333,13 +399,13 @@ class DynamicTimetable(Timetable):
                 xref="x2",
                 yref="y2",
                 opacity=0.5,
-                fillcolor="black",
+                fillcolor=mcolors.to_hex(theme.fontcolor),
                 col=1,
                 row=2,
             )
 
         # plot the courses:
-        for subject in courses:
+        for i_subject,subject in enumerate(courses):
             fig.add_shape(
                 type="rect",
                 x0=subject.x * 100,
@@ -348,7 +414,7 @@ class DynamicTimetable(Timetable):
                 y0=subject.y + int((subject.duration).total_seconds() / 60),
                 xref="x2",
                 yref="y2",
-                fillcolor=subject.color,
+                fillcolor=mcolors.to_hex(theme.color_list(len(courses))[i_subject]),
                 col=1,
                 row=2,
             )
@@ -359,6 +425,7 @@ class DynamicTimetable(Timetable):
                 showarrow=False,
                 col=1,
                 row=2,
+                font={"color": mcolors.to_hex(theme.fontcolor)},
             )
             # add hover info:
             fig.add_trace(
@@ -375,6 +442,9 @@ class DynamicTimetable(Timetable):
                     f"<br> {subject.start_time.time()}"
                     f"<br> {subject.endtime.time()}"
                     f"<extra></extra>",
+                    hoverlabel=dict(bgcolor=mcolors.to_hex(theme.color_list(len(courses))[i_subject]),
+                                    font_color=mcolors.to_hex(theme.fontcolor),
+                                    bordercolor=mcolors.to_hex(theme.fontcolor)),
                     showlegend=False,
                 ),
                 row=2,
@@ -395,6 +465,7 @@ class DynamicTimetable(Timetable):
         return fig.show()
 
 
+
 def choose_layout(type) -> Timetable:
     if type == "static":
         return StaticTimestable()
@@ -402,8 +473,23 @@ def choose_layout(type) -> Timetable:
         return DynamicTimetable()
     raise ValueError(f"Unknown timetable type: {type}")
 
+def choose_theme(theme) -> Theme:
+    if theme == "dark":
+        return DarkTheme()
+    elif theme == "light":
+        return LightTheme()
+    elif theme == "rainbow":
+        return RainbowTheme()
+    elif theme == "autumn":
+        return AutumnTheme()
+    elif theme == "neutral":
+        return NeutralTheme()
+    elif theme == "nature":
+        return NatureTheme()
+    raise ValueError(f"Unknown theme: {theme}")
 
-def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True):
+
+def main(type, filename, theme, figsize_timetable, user, auto_generate=True):
     if not auto_generate:
         user_data = dict_from_user_input()
         csv_path = generate_csv(user_data)
@@ -423,20 +509,19 @@ def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True
             row["duration"],
             row["room"],
             row["lecturer"],
-            colors[i + i * 7],
             figsize_timetable,
         )
         courses.append(course)
 
     timetable = choose_layout(type)
-    timetable.decorator(courses, themecolor, figsize_timetable, user)
+    timetable.decorator(courses, choose_theme(theme), figsize_timetable, user)
 
 
 if __name__ == "__main__":
     main(
-        type="dynamic",
+        type="static",
         filename="planner_template - chavez_pope.csv",
-        themecolor="skyblue",
+        theme="autumn",
         figsize_timetable=(8, 6),
         user="Marieke",
         auto_generate=True
