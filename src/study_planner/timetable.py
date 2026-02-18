@@ -27,6 +27,101 @@ BASE_DIR = Path.cwd().parents[1]
 
 DATA_DIR: Path = BASE_DIR / "data"
 
+BLANK_INPUT_DICT = {
+    "course_name": [],
+    "credits": [],
+    "day": [],
+    "start_time": [],
+    "duration": [],
+    "room": [],
+    "lecturer": []
+}
+
+# %%
+def get_user_inputs() -> tuple[str, int, str, str, int, str, str]:
+    """Collect one course entry from the user"""
+
+    course = input("Enter course name: ")
+
+    while True:
+        try:
+            cred = int(input("Enter credits: "))
+            break
+        except ValueError:
+            print("Invalid input; please enter an integer.")
+
+    while True:
+        try:
+            da = input("Enter day (Monday, Tuesday, etc): ").capitalize()
+            if da in WEEK_DAYS:
+                break
+            else:
+                print("Invalid input. Please enter a valid day (Monday, Tuesday, etc).")
+        except ValueError:
+            print("Invalid input; please enter day (Monday, Tuesday, etc):")
+
+    while True:
+        start = input("Enter start time (HH:MM) in 24 hour format: ")
+        try:
+            valid = datetime.strptime(start, "%H:%M")
+            break
+        except ValueError:
+            print("Invalid time. Please enter time in HH:MM (24-hour format).")
+
+    while True:
+        try:
+            dur = int(input("Enter duration (in minutes): "))
+            if dur <= 1440:
+                break
+            else:
+                print("Invalid input. Please enter a valid duration (in minutes). "
+                      "Maximum duration is one day (1440 minutes).")
+
+        except ValueError:
+            print("Invalid time. Please enter time in full minutes.")
+
+    r = input("Enter room: ")
+
+    lect = input("Enter lecturer: ")
+
+    return course, cred, da, start, dur, r, lect
+
+
+def dict_from_user_input() -> dict:
+    """Generates a dictionary from repeated user inputs"""
+
+    data = BLANK_INPUT_DICT
+
+    choice = "y"
+    while choice.lower() == "y":
+        course, cred, da, start, dur, r, lect = get_user_inputs()
+
+        data["course_name"].append(course)
+        data["credits"].append(cred)
+        data["day"].append(da)
+        data["start_time"].append(start)
+        data["duration"].append(dur)
+        data["room"].append(r)
+        data["lecturer"].append(lect)
+
+        choice = input("\nAdd another course? (y/n): ")
+
+    return data
+
+
+def generate_csv(user_input: dict, name: str = "timetable.csv") -> Path:
+    """Generates a csv file from the user's inputs and return its path"""
+    df = pd.DataFrame(user_input)
+
+    choice = input("\n Would you like to name the csv file? (y/n): ").lower()
+    if choice == "y":
+        name = input("Enter name of csv file: ") + ".csv"
+
+    path = DATA_DIR / name
+    df.to_csv(path, index=False)
+
+    return path
+
 
 def load_course_data(file: str) -> pd.DataFrame:
     """Load course data from csv file in a padas dataframe"""
