@@ -4,14 +4,12 @@ from datetime import datetime, time, timedelta
 from pathlib import Path
 
 import matplotlib.colors as mcolors
-import matplotlib.dates as mdates
 from matplotlib.patches import Rectangle
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-
 
 WEEK_DAYS: list[str] = [
     "Sunday",
@@ -22,8 +20,8 @@ WEEK_DAYS: list[str] = [
     "Friday",
     "Saturday",
 ]
-
-BASE_DIR = Path.cwd().parents[1]
+BASE_DIR = Path(__file__).resolve().parents[2]
+# print("base dir:" , BASE_DIR)
 
 DATA_DIR: Path = BASE_DIR / "data"
 
@@ -405,7 +403,12 @@ def choose_layout(type) -> Timetable:
     raise ValueError(f"Unknown timetable type: {type}")
 
 
-def main(type, filename, themecolor, figsize_timetable, user):
+def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True):
+    if not auto_generate:
+        user_data = dict_from_user_input()
+        csv_path = generate_csv(user_data)
+        filename = csv_path
+
     df = load_course_data(filename)
     df = prepare_df(df)
     courses = []
@@ -433,7 +436,8 @@ if __name__ == "__main__":
     main(
         type="dynamic",
         filename="planner_template - chavez_pope.csv",
-        themecolor="skyblue",
+        themecolor="black",
         figsize_timetable=(8, 6),
         user="Marieke",
+        auto_generate=True
     )
