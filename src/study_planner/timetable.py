@@ -199,10 +199,6 @@ class StaticTimestable(Timetable):
         latest_time = max(end_minutes)
         latest_time += 120
 
-        y_bounds = [
-            (earliest_time - timedelta(hours=2)).hour,
-            (latest_time + timedelta(hours=2)).hour,
-        ]
         yticks = np.arange(y_bounds[0] * 60, y_bounds[1] * 60 + 1, 60)
 
         height_ratios = [1, 8]
