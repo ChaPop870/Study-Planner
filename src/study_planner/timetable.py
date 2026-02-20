@@ -162,7 +162,7 @@ class Course:
         self.lecturer = lecturer
         self.color = color
 
-        self.endtime = datetime.combine(datetime.today().date(), datetime.time(start_time)) + duration
+        self.end_time = datetime.combine(datetime.today().date(), datetime.time(start_time)) + duration
         self.y = start_time.hour * 60 + start_time.minute # Any better name that self.y?
         day_to_x = {
             day: i * figsize_timetable[0] / len(WEEK_DAYS)
