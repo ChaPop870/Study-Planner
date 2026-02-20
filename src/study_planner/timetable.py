@@ -199,7 +199,7 @@ class StaticTimestable(Timetable):
         latest_time = max(end_minutes)
         latest_time += 120
 
-        yticks = np.arange(y_bounds[0] * 60, y_bounds[1] * 60 + 1, 60)
+        yticks = np.arange(earliest_time, latest_time + 1, 60)
 
         height_ratios = [1, 8]
         day_width = figsize_timetable[0] / len(WEEK_DAYS)
