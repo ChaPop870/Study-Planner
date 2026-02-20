@@ -135,6 +135,11 @@ def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def minutes_since_midnight(date: datetime) -> int:
+    """Return the number of minutes since midnight"""
+    return date.hour * 60 + date.minute
+
+
 class Course:
     def __init__(
         self,
