@@ -457,9 +457,71 @@ def choose_layout(type: str) -> Timetable:
 
 def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True):
     if not auto_generate:
-        user_data = dict_from_user_input()
-        csv_path = generate_csv(user_data)
-        filename = csv_path
+        show_welcome()
+        print("The following timetables are available:\n")
+
+        timetable_list = available_timetable_list(DATA_DIR)
+
+        for i, file in enumerate(timetable_list, start=1):
+            print(f"{i}. {file}")
+
+            if i == len(timetable_list):
+                print()
+
+        instructions()
+
+        while True:
+            try:
+                selection = int(input("Choice: "))
+
+                if selection == -1:
+                    print("\nThank you. We hope to see you again!")
+                    return
+
+                elif selection == 0:
+                    user_data = dict_from_user_input()
+                    csv_path = generate_csv(user_data)
+                    filename = csv_path
+                    break
+
+                elif 1 <= selection <= len(timetable_list):
+                    filename = timetable_list[selection - 1]
+                    break
+
+                else:
+                    print("Choice out of range. Please select the index from the available files.\n")
+
+                    for i, file in enumerate(timetable_list, start=1):
+                        print(f"{i}. {file}")
+
+                        if i == len(timetable_list):
+                            print()
+
+            except ValueError:
+                print("Invalid choice. Please try again.")
+
+        print("\nHow do you want the display?")
+
+        for i, display in enumerate(["static", "dynamic"], start=1):
+            print(f"{i}. {display}")
+
+        while True:
+            try:
+                selection = int(input("Choice: "))
+
+                if selection == 1:
+                    type = "static"
+                    break
+
+                elif selection == 2:
+                    type = "dynamic"
+                    break
+
+                else:
+                    print("Choice out of range. Please select '1' for a static display or '2' for a dynamic display.\n")
+
+            except ValueError:
+                print("Invalid choice. Please try again.")
 
     df = load_course_data(filename)
     df = prepare_df(df)
