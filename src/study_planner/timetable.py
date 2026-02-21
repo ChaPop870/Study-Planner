@@ -115,7 +115,11 @@ def generate_csv(user_input: dict, name: str = "timetable.csv") -> Path:
     """Generates a csv file from the user's inputs and return its path"""
     df = pd.DataFrame(user_input)
 
-    choice = input("\n Would you like to name the csv file? (y/n): ").lower()
+    choice = input("\n Would you like to name the csv file? (y/n): ").strip.lower()
+
+    while choice not in ("y", "n"):
+        choice = input("Please enter 'y' or 'n': ").strip().lower()
+
     if choice == "y":
         name = input("Enter name of csv file: ") + ".csv"
 
