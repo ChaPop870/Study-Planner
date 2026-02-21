@@ -102,7 +102,11 @@ def dict_from_user_input() -> dict:
         data["room"].append(r)
         data["lecturer"].append(lect)
 
-        choice = input("\nAdd another course? (y/n): ")
+        while True:
+            choice = input("\nAdd another course? (y/n): ").strip().lower()
+            if choice in ("y", "n"):
+                break
+            print("Please enter 'y' or 'n'.")
 
     return data
 
