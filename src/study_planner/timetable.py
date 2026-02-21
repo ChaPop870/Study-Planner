@@ -245,7 +245,7 @@ class StaticTimestable(Timetable):
         ax2.set_yticks(yticks)
         ax2.set_ylim(yticks[0], yticks[-1])
         ax2.invert_yaxis()
-        ax2.set_yticklabels([f"{int(h / 60):02d}:00" for h in yticks])
+        ax2.set_yticklabels([f"{(h // 60) % 24:02d}:00" for h in yticks])
         ax2.set_ylabel("Hour")
         ax2.set_xticks([])
         daylines = [
