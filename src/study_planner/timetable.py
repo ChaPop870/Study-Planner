@@ -142,8 +142,8 @@ def minutes_since_midnight(date: datetime) -> int:
     return date.hour * 60 + date.minute
 
 
-def welcome() -> str:
-    """Prints welcome message"""
+def show_welcome() -> str:
+    """Prints a welcome message to the user."""
     return "Welcome to Chavez & Marieke's timetable app!\n"
 
 
