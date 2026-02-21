@@ -396,7 +396,7 @@ class DynamicTimetable(Timetable):
             title_text="Hour",
             range=[max(yticks), min(yticks)],
             tickvals=yticks,
-            ticktext=[f"{int(h / 60):02d}:00" for h in yticks],
+            ticktext=[f"{(h // 60) % 24:02d}:00" for h in yticks],
             row=2,
             col=1,
         )
