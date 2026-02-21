@@ -178,6 +178,7 @@ class Timetable(ABC):
 
 
 class StaticTimestable(Timetable):
+
     def decorator(self, courses, themecolor, figsize_timetable, user):
         earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
         latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
