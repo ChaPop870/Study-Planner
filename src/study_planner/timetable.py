@@ -455,7 +455,8 @@ def choose_layout(type: str) -> Timetable:
     raise ValueError(f"Unknown timetable type: {type}")
 
 
-def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True):
+
+def main(type, filename, themecolor, figsize_timetable, user, auto_generate=False):
     if not auto_generate:
         show_welcome()
         print("The following timetables are available:\n")
@@ -553,5 +554,5 @@ if __name__ == "__main__":
         themecolor="skyblue",
         figsize_timetable=(8, 6),
         user="Marieke",
-        auto_generate=False
+        auto_generate=True
     )
