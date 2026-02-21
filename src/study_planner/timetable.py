@@ -146,6 +146,7 @@ def welcome() -> str:
     """Prints welcome message"""
     return "Welcome to Chavez & Marieke's timetable app!\n"
 
+
 def instructions() -> str:
     """Prints an instructions message to the user."""
     print("To display the desired timetable, press the index of the timetable.")
