@@ -142,6 +142,11 @@ def minutes_since_midnight(date: datetime) -> int:
     return date.hour * 60 + date.minute
 
 
+def welcome() -> str:
+    """Prints welcome message"""
+    return "Welcome to Chavez & Marieke's timetable app!\n"
+
+
 def available_timetable_list(directory: Path) -> str:
     """List the csv files from the given directory"""
     file_list = [path.name for path in directory.glob("*.csv")]
