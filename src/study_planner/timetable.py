@@ -146,6 +146,12 @@ def welcome() -> str:
     """Prints welcome message"""
     return "Welcome to Chavez & Marieke's timetable app!\n"
 
+def instructions() -> str:
+    """Prints an instructions message to the user."""
+    print("To display the desired timetable, press the index of the timetable.")
+    print("To generate your own timetable, press '0'")
+    print("To exit the app, press '-1'")
+
 
 def available_timetable_list(directory: Path) -> str:
     """List the csv files from the given directory"""
