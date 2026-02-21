@@ -11,6 +11,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+
 WEEK_DAYS: list[str] = [
     "Sunday",
     "Monday",
@@ -128,6 +129,7 @@ def load_course_data(file: str) -> pd.DataFrame:
 
 
 def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
+    """Return a dataframe containing the start time, duration, and the corresponding end time."""
     df = data.copy()
     df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
     df["duration"] = pd.to_timedelta(df["duration"], unit="minutes")
@@ -141,6 +143,7 @@ def minutes_since_midnight(date: datetime) -> int:
 
 
 class Course:
+
     def __init__(
         self,
         name: str,
@@ -172,6 +175,7 @@ class Course:
 
 
 class Timetable(ABC):
+
     @abstractmethod
     def decorator(self, courses, themecolor, figsize_timetable, user):
         pass
@@ -180,8 +184,8 @@ class Timetable(ABC):
 class StaticTimestable(Timetable):
 
     def decorator(self, courses, themecolor, figsize_timetable, user):
-        earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
-        latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
+        start_minutes = []
+        end_minutes = []
 
         for subject in courses:
             start = minutes_since_midnight(subject.start_time)
@@ -281,8 +285,8 @@ class StaticTimestable(Timetable):
 class DynamicTimetable(Timetable):
 
     def decorator(self, courses, themecolor, figsize_timetable, user):
-        earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
-        latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
+        start_minutes = []
+        end_minutes = []
 
         for subject in courses:
             start = minutes_since_midnight(subject.start_time)
@@ -298,11 +302,10 @@ class DynamicTimetable(Timetable):
         earliest_time = min(start_minutes)
         earliest_time -= 120
 
-        y_bounds = [
-            (earliest_time - timedelta(hours=2)).hour,
-            (latest_time + timedelta(hours=2)).hour,
-        ]
-        yticks = np.arange(y_bounds[0] * 60, y_bounds[1] * 60 + 1, 60)
+        latest_time = max(end_minutes)
+        latest_time += 120
+
+        yticks = np.arange(earliest_time, latest_time + 1, 60)
 
         height_ratios = [1, 8]
         day_width = figsize_timetable[0] / len(WEEK_DAYS)
@@ -339,7 +342,7 @@ class DynamicTimetable(Timetable):
             )
         fig.update_yaxes(range=[0, height_ratios[0]], visible=False, col=1, row=1)
 
-        # create timetable in subplot 2:
+        # Create timetable in subplot 2:
         daylines = [
             i * figsize_timetable[0] * 100 / len(WEEK_DAYS)
             for i, _ in enumerate(WEEK_DAYS)
@@ -359,7 +362,7 @@ class DynamicTimetable(Timetable):
                 row=2,
             )
 
-        # plot the courses:
+        # Plot the courses:
         for subject in courses:
             fig.add_shape(
                 type="rect",
@@ -381,7 +384,7 @@ class DynamicTimetable(Timetable):
                 col=1,
                 row=2,
             )
-            # add hover info:
+            # Add hover info:
             fig.add_trace(
                 go.Scatter(
                     x=[subject.x * 100 + 0.5 * day_width * 100],
@@ -394,7 +397,7 @@ class DynamicTimetable(Timetable):
                     f"<br> {subject.lecturer}"
                     f"<br> {subject.room}"
                     f"<br> {subject.start_time.time()}"
-                    f"<br> {subject.endtime.time()}"
+                    f"<br> {subject.end_time.time()}"
                     f"<extra></extra>",
                     showlegend=False,
                 ),
@@ -416,7 +419,8 @@ class DynamicTimetable(Timetable):
         return fig.show()
 
 
-def choose_layout(type) -> Timetable:
+def choose_layout(type: str) -> Timetable:
+    """Select the """
     if type == "static":
         return StaticTimestable()
     elif type == "dynamic":
@@ -460,5 +464,5 @@ if __name__ == "__main__":
         themecolor="skyblue",
         figsize_timetable=(8, 6),
         user="Marieke",
-        auto_generate=True
+        auto_generate=False
     )
