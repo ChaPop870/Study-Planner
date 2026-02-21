@@ -283,10 +283,18 @@ class DynamicTimetable(Timetable):
         latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
 
         for subject in courses:
-            if subject.start_time < earliest_time:
-                earliest_time = subject.start_time
-            if subject.endtime > latest_time:
-                latest_time = subject.endtime
+            start = minutes_since_midnight(subject.start_time)
+            end = minutes_since_midnight(subject.end_time)
+
+            # Detect rollover past midnight
+            if end < start:
+                end += 24 * 60
+
+            start_minutes.append(start)
+            end_minutes.append(end)
+
+        earliest_time = min(start_minutes)
+        earliest_time -= 120
 
         y_bounds = [
             (earliest_time - timedelta(hours=2)).hour,
