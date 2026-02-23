@@ -1,5 +1,15 @@
 # Study-Planner
 
+## Review remarks
+
+### General remarks
+- quite a lot of dependencies are in requirements.txt? Do you need all of them explicitly?
+  - usually just the once directly in use are defined and not all subdependencies.This helps others to identify which dependencies are important
+- remove "development code" (test.py, testing.ipynb, *png's (png))
+  - for images, which you want to show in your README.md, put them in a dedicated "images" folder to keep the root folder of the project clean
+- 
+### Grading criteria remarks
+- no tests yet
 ## Project Description
 This project aims to create study planner for students. It will allow students to plan their schedules and later view it in an intuitive graphical user interface.  There are also plans to scrape websites with classes to automatically populate the planner using web scraping. Also, we can create a room timetable as well for the Geomatikum.
 

@@ -1,6 +1,8 @@
-# Imports
+# Imports  # remove, obvious imports clutter teh code (-> see old slides coding style)
 from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
 from datetime import datetime, time, timedelta
+from enum import StrEnum
 from pathlib import Path
 
 import matplotlib.colors as mcolors
@@ -11,6 +13,10 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+_MAX_MINUTES_IN_A_DAY = 1440
+
+# If you have a distinct list of values, you can use Enums.
+#  I gave you an example below.
 WEEK_DAYS: list[str] = [
     "Sunday",
     "Monday",
@@ -20,10 +26,30 @@ WEEK_DAYS: list[str] = [
     "Friday",
     "Saturday",
 ]
+
+# You can work with the values as with strings, but the options are limited
+# class WeekDay(StrEnum):
+#     """Distinct week days by name."""
+#
+#     SUNDAY = "Sunday"
+#     MONDAY = "Monday"
+#     TUESDAY = "Tuesday"
+#     WEDNESDAY = "Wednesday"
+#     THURSDAY = "Thursday"
+#     FRIDAY = "Friday"
+#     SATURDAY = "Saturday"
+
+
+
 BASE_DIR = Path(__file__).resolve().parents[2]
 
-DATA_DIR: Path = BASE_DIR / "data"
+# types are especially relevant in function signatures and on attributes.
+#  If the value you assign already has a clear type, explicit typing is not necessary
+DATA_DIR = BASE_DIR / "data"
 
+# you should not store data on a module level.
+# If you would work with multiple planners, this would mix up planners.
+# Below is an example how you can utilize (data-) classes to store the information.
 BLANK_INPUT_DICT: dict[str, list[str | int| str| str| int| str| str]] = {
     "course_name": [],
     "credits": [],
@@ -34,23 +60,61 @@ BLANK_INPUT_DICT: dict[str, list[str | int| str| str| int| str| str]] = {
     "lecturer": []
 }
 
-# %%
+# @dataclass
+# class Course:
+#     """One university course."""
+#
+#     course_name: str
+#     credits: int
+#     week_day: WeekDay
+#     start_time: str
+#     duration_minutes: int
+#     room: str
+#     lecturer: str
+#
+# @dataclass
+# class Timetable:
+#     """Timetable containing multiple courses over the week."""
+#
+#     courses: list[Course] = field(default_factory=list)
+#
+#     def to_df(self) -> pd.DataFrame:
+#         """Generate DataFrame representation of timetable."""
+#         ...  # hint: use alist comprehension, `from dataclasses import asdict` and `pd.DataFrame.from_records`
+#
+# # Examples
+# sample_course = Course(
+#     course_name='sample_course',
+#     credits=1,
+#     week_day=WeekDay.MONDAY,
+#     start_time="12:00",
+#     duration_minutes=60,
+#     room="63-580",
+#     lecturer="Bob",
+# )
+# timetable_bob = Timetable()
+# timetable_bob.courses.append(sample_course)
+
+
+# %%  # remove, it is a nice feature during development, but once a function is written, it can be removed :)
+# def get_user_inputs() -> Course:
 def get_user_inputs() -> tuple[str, int, str, str, int, str, str]:
-    """Collect one course entry from the user"""
+    """Collect one course entry from the user."""
 
     course = input("Enter course name: ")
 
     while True:
         try:
-            cred = int(input("Enter credits: "))
+            credits = int(input("Enter credits: "))
             break
         except ValueError:
             print("Invalid input; please enter an integer.")
 
     while True:
         try:
-            da = input("Enter day (Monday, Tuesday, etc): ").capitalize()
-            if da in WEEK_DAYS:
+            week_day = input("Enter day (Monday, Tuesday, etc): ").capitalize()  # Variable names should speak for themselves
+            # week_day = WeekDay(input("Enter day (Monday, Tuesday, etc): "))  # following check would be unnecessary
+            if week_day in WEEK_DAYS:
                 break
             else:
                 print("Invalid input. Please enter a valid day (Monday, Tuesday, etc).")
@@ -60,39 +124,49 @@ def get_user_inputs() -> tuple[str, int, str, str, int, str, str]:
     while True:
         start = input("Enter start time (HH:MM) in 24 hour format: ")
         try:
-            valid = datetime.strptime(start, "%H:%M")
+            # The following line is a good example for a good comment,
+            # otherwise someone would be irritated about code which isn't assigned to a variable.
+            # btw. Why are you not using datetime.time, but instead a string?
+
+            # verify format
+            datetime.strptime(start, "%H:%M")  # value not needed
             break
         except ValueError:
             print("Invalid time. Please enter time in HH:MM (24-hour format).")
 
     while True:
         try:
-            dur = int(input("Enter duration (in minutes): "))
-            if dur <= 1440:
+            duration = int(input("Enter duration (in minutes): "))  # Variable names should speak for themselves
+            if duration <= _MAX_MINUTES_IN_A_DAY:
                 break
             else:
                 print("Invalid input. Please enter a valid duration (in minutes). "
-                      "Maximum duration is one day (1440 minutes).")
+                      f"Maximum duration is one day ({_MAX_MINUTES_IN_A_DAY} minutes).")
 
         except ValueError:
             print("Invalid time. Please enter time in full minutes.")
 
-    r = input("Enter room: ")
+    room = input("Enter room: ")  # Variable names should speak for themselves
 
-    lect = input("Enter lecturer: ")
+    lecturer = input("Enter lecturer: ")  # Variable names should speak for themselves
 
-    return course, cred, da, start, dur, r, lect
+    return course, credits, week_day, start, duration, room, lecturer
+    # return Course(course, credits, week_day, start, duration, room, lecturer)
 
 
-def dict_from_user_input() -> dict:
-    """Generates a dictionary from repeated user inputs"""
+# Generally speaking names of function etc. should be domain based. a "dict" could be everything...
+# Ask yourself: "What does the dictionary represent domain-wise.
+def dict_from_user_input() -> dict:  # return type to broad, maybe use Timetable class instead
+    """Generates a dictionary from repeated user inputs."""
 
-    data = BLANK_INPUT_DICT
+    data = BLANK_INPUT_DICT  # This will just link the BLANK, but will not copy it.
 
     choice = "y"
     while choice.lower() == "y":
         course, cred, da, start, dur, r, lect = get_user_inputs()
 
+        # The following structure is quite vulnerable to changes of the keys.
+        # That's why the (data-)classes make sense. :)
         data["course_name"].append(course)
         data["credits"].append(cred)
         data["day"].append(da)
@@ -106,28 +180,30 @@ def dict_from_user_input() -> dict:
     return data
 
 
-def generate_csv(user_input: dict, name: str = "timetable.csv") -> Path:
-    """Generates a csv file from the user's inputs and return its path"""
-    df = pd.DataFrame(user_input)
+# def generate_csv(user_input: Timetable, file_name: str = "timetable.csv") -> Path:
+def generate_csv(user_input: dict, file_name: str = "timetable.csv") -> Path:
+    """Generates a csv file from the user's inputs and return its path."""
+    df = pd.DataFrame(user_input)  # how to do this is hinted in the class definition
 
     choice = input("\n Would you like to name the csv file? (y/n): ").lower()
     if choice == "y":
-        name = input("Enter name of csv file: ") + ".csv"
+        file_name = f'{input("Enter name of csv file: ")}.csv"'  # fstrings are the preferred way for this as strings. "Addition" of strings is considered bad style.
 
-    path = DATA_DIR / name
+    path = DATA_DIR / file_name
     df.to_csv(path, index=False)
 
     return path
 
 
 def load_course_data(file: str) -> pd.DataFrame:
-    """Load course data from csv file in a padas dataframe"""
+    """Load course data from csv file in a padas dataframe."""
     filepath: Path = DATA_DIR / file
     df = pd.read_csv(filepath).set_index("course_name")
     return df
 
 
 def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
+    """Docstring."""
     df = data.copy()
     df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
     df["duration"] = pd.to_timedelta(df["duration"], unit="minutes")
@@ -135,19 +211,25 @@ def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+# Haven't seen this definition before my suggestion at the top. Maybe reuse my dataclass approach to be slightly shorter.
+# No the question rises for me: Why do handle the "BLANK_..." dict structure if you could directly use a list of courses
+# (in the data class case you can set additional attributes in the `__post_init__()` method)
 class Course:
+    """Docstring."""
+
     def __init__(
         self,
         name: str,
-        credits: int,
+        credits: int,  # unfortunately "credits" is a build-in function. The usual way to circumvent this is like this: "credits_"
         day: str,
         start_time: datetime,
         duration: timedelta,
         room: str,
         lecturer: str,
         color: str,
-        figsize_timetable,
+        figsize_timetable,  # type? and why is this part of the course? Seems to be a visualization aspect...
     ) -> None:
+        """Docstring."""
         self.name = name
         self.credits = credits
         self.day = day
@@ -167,13 +249,20 @@ class Course:
 
 
 class Timetable(ABC):
+    """Docstring."""
+
     @abstractmethod
-    def decorator(self, courses, themecolor, figsize_timetable, user):
+    def decorator(self, courses, themecolor, figsize_timetable, user):  # typing, and maybe you can come up with a better method name. Maybe `show`/`display`?
+        """Docstring."""
         pass
 
 
 class StaticTimestable(Timetable):
-    def decorator(self, courses, themecolor, figsize_timetable, user):
+    """Docstring."""
+
+    def decorator(self, courses, themecolor, figsize_timetable, user):  # typing
+        """Docstring."""
+        # please divide the method in to smaller protected methods. It is doing a lot!
         earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
         latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
 
@@ -266,7 +355,11 @@ class StaticTimestable(Timetable):
 
 
 class DynamicTimetable(Timetable):
-    def decorator(self, courses, themecolor, figsize_timetable, user):
+    """Docstring."""
+
+    def decorator(self, courses, themecolor, figsize_timetable, user):  # typing
+        """Docstring."""
+        # please divide the method in to smaller protected methods. It is doing a lot!
         earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
         latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
 
@@ -317,12 +410,13 @@ class DynamicTimetable(Timetable):
             )
         fig.update_yaxes(range=[0, height_ratios[0]], visible=False, col=1, row=1)
 
-        # create timetable in subplot 2:
-        daylines = [
+        # create timetable in subplot 2:  # this could be a sub method with a name like the comment.
+        # -> removes comment, makes structure clear by good naming of methods. -> Jackpot
+        day_lines = [
             i * figsize_timetable[0] * 100 / len(WEEK_DAYS)
             for i, _ in enumerate(WEEK_DAYS)
         ]
-        for x in daylines:
+        for x in day_lines:
             fig.add_shape(
                 type="line",
                 x0=x,
@@ -395,14 +489,15 @@ class DynamicTimetable(Timetable):
 
 
 def choose_layout(type) -> Timetable:
-    if type == "static":
+    if type == "static":  # Could be an Enum if it has limited options.
         return StaticTimestable()
-    elif type == "dynamic":
+    elif type == "dynamic":  # Could be an Enum if it has limited options.
         return DynamicTimetable()
     raise ValueError(f"Unknown timetable type: {type}")
 
 
-def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True):
+def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True):  # typing
+    """Docstring."""
     if not auto_generate:
         user_data = dict_from_user_input()
         csv_path = generate_csv(user_data)
@@ -415,7 +510,7 @@ def main(type, filename, themecolor, figsize_timetable, user, auto_generate=True
 
     for i, (subject, row) in enumerate(df.iterrows()):
         course = Course(
-            subject,
+            subject,  # typing is off "Expected type 'str', got 'Hashable' instead"
             row["credits"],
             row["day"],
             row["start_time"],
