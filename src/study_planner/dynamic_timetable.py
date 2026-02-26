@@ -1,8 +1,9 @@
 from src.study_planner.timetable import TimetableLayout, WeekDay
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-import matplotlib.colors as mcolors
-from datetime import datetime, time, timedelta
+
+from src.study_planner.timetable import TimetableLayout, WeekDay
+
 
 class DynamicTimetable(TimetableLayout):
     """Dynamic Timetable Layout"""
