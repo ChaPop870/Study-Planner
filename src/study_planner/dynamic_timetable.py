@@ -1,4 +1,6 @@
-from src.study_planner.timetable import TimetableLayout, WeekDay
+from datetime import datetime, time, timedelta
+
+import matplotlib.colors as mcolors
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
