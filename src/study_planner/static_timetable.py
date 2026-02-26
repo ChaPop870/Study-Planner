@@ -2,6 +2,10 @@ from src.study_planner.timetable import TimetableLayout, WeekDay
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import matplotlib.patheffects as pe
+import matplotlib.pyplot as plt
+
+from src.study_planner.timetable import TimetableLayout, WeekDay
+
 
 class StaticTimestable(TimetableLayout):
     def display_timetable(self):
