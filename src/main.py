@@ -1,11 +1,5 @@
-from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
-from src.study_planner.static_timetable import StaticTimestable
-from src.study_planner.dynamic_timetable import DynamicTimetable
-from src.study_planner.themes import *
-
 from pathlib import Path
 from datetime import datetime
-import pandas as pd
 from enum import StrEnum
 
 import pandas as pd
@@ -21,6 +15,7 @@ _MAX_MINUTES_IN_A_DAY = 1440
 BASE_DIR = Path(__file__).resolve().parents[1]
 
 DATA_DIR = BASE_DIR / "data"
+
 
 def get_user_inputs() -> Course:
     """Collect one course entry from the user"""
@@ -99,6 +94,7 @@ def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
     df["end_time"] = df["start_time"] + df["duration_minutes"]
     return df
 
+
 class LayoutType(StrEnum):
     """Distinct Layout Type Options by name."""
     STATIC = "static"
@@ -173,12 +169,11 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
     timetable.display_timetable()
 
 
-
 if __name__ == "__main__":
     main(
         layout_type="dynamic",
         filename="planner_template - chavez_pope.csv",
-        theme="autumn",
+        theme=TimetableTheme.AUTUMN,
         figsize_timetable=(8, 6),
         user="Marieke",
         auto_generate=True

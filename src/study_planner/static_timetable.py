@@ -1,5 +1,3 @@
-from src.study_planner.timetable import TimetableLayout, WeekDay
-import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt

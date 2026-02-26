@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from datetime import datetime, time, timedelta
 from dataclasses import dataclass, field, asdict
 from enum import StrEnum
+
 import numpy as np
 import pandas as pd
 
@@ -101,4 +102,3 @@ class TimetableLayout(ABC):
     def display_courses(self, ax):
         """Plotting the courses into the timetable layout"""
         pass
-
