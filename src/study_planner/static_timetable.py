@@ -1,0 +1,100 @@
+from src.study_planner.timetable import TimetableLayout, WeekDay
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+import matplotlib.patheffects as pe
+
+class StaticTimestable(TimetableLayout):
+    def display_timetable(self):
+        """ Plotting the timetable with courses."""
+        height_ratios = [1, 8]
+
+        fig = plt.figure(figsize=self.figsize_timetable)
+        fig.subplots_adjust(left=0.1, right=0.95)
+        gs = fig.add_gridspec(2, 1, height_ratios=height_ratios, hspace=0.0)
+
+        ax1 = fig.add_subplot(gs[0])
+        ax2 = fig.add_subplot(gs[1], sharex=ax1)
+
+        self.display_timetable_header(ax1)
+        self.create_timetable_layout(ax2)
+        self.display_courses(ax2)
+
+        return fig.show()
+
+
+    def display_timetable_header(self, ax1):
+        """Creating timetable header"""
+        day_width = self.figsize_timetable[0] / len(WeekDay)
+        text_offset = [day_width / 2, 1/2]
+
+        for i, day in enumerate(WeekDay):
+            rec = Rectangle(
+                (i * day_width, 0),
+                day_width,
+                1,
+                edgecolor=self.theme.fontcolor,
+                facecolor=self.theme.themecolor,  # theme.color_list(len(courses))[0],
+            )
+            ax1.add_patch(rec)
+
+            ax1.text(
+                i * day_width + text_offset[0],
+                text_offset[1],
+                f"{day}",
+                ha="center",
+                va="center",
+                fontsize=12,
+            )
+
+        ax1.set_xlim(0, self.figsize_timetable[0])
+        ax1.set_ylim(0, 1)
+        ax1.axis("off")
+        title = ax1.set_title(
+            f"{self.user}'s Study Timetable \n",
+            fontsize=16,
+            color=self.theme.themecolor,
+            fontweight="bold",
+        )
+        title.set_path_effects(
+            [pe.withStroke(linewidth=2, foreground=self.theme.fontcolor)
+             ])
+
+    def create_timetable_layout(self, ax2):
+        """Creating timetable layout."""
+        y_bounds, y_ticks = self.calc_yrange_for_plotting()
+        ax2.set_yticks(y_ticks)
+        ax2.set_ylim(y_ticks[0], y_ticks[-1])
+        ax2.invert_yaxis()
+        ax2.set_yticklabels([f"{int(h / 60):02d}:00" for h in y_ticks])
+        ax2.set_ylabel("Hour")
+        ax2.set_xticks([])
+
+    def display_courses(self, ax2):
+        """Plotting the courses into the timetable layout"""
+        daylines = [i * self.figsize_timetable[0] / len(WeekDay) for i, day in enumerate(WeekDay)]
+        for x in daylines:
+            ax2.axvline(x, color=self.theme.fontcolor, alpha=0.5)
+
+        for i_subject, subject in enumerate(self.courses):
+            width = self.figsize_timetable[0] / len(WeekDay)  # One day wide
+            height = subject.duration_minutes.total_seconds() / 60  # Duration in minutes
+            day_to_x = {
+                day: i * self.figsize_timetable[0] / len(WeekDay) for i, day in enumerate(WeekDay)
+            }
+            x = day_to_x[subject.week_day]
+            y = subject.start_time.hour * 60 + subject.start_time.minute  # Any better name that self.y?
+
+            period = Rectangle(
+                xy=(x, y),
+                width=width,
+                height=height,
+                facecolor=self.theme.color_list(len(self.courses))[i_subject],
+                edgecolor=self.theme.fontcolor,
+                label=subject.course_name,
+            )
+            ax2.add_patch(period)
+            ax2.text(
+                x + width * 0.3, y + height * 0.7, subject.course_name[0:6]
+            )
+
+        ax2.legend()

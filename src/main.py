@@ -1,0 +1,179 @@
+from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
+from src.study_planner.static_timetable import StaticTimestable
+from src.study_planner.dynamic_timetable import DynamicTimetable
+from src.study_planner.themes import *
+
+from pathlib import Path
+from datetime import datetime
+import pandas as pd
+from enum import StrEnum
+
+
+
+_MAX_MINUTES_IN_A_DAY = 1440
+
+BASE_DIR = Path(__file__).resolve().parents[1]
+
+DATA_DIR = BASE_DIR / "data"
+
+def get_user_inputs() -> Course:
+    """Collect one course entry from the user"""
+
+    course_name = input("Enter course name: ")
+
+    while True:
+        try:
+            credits_ = int(input("Enter credits: "))
+            break
+        except ValueError:
+            print("Invalid input; please enter an integer.")
+
+    while True:
+        try:
+            week_day = WeekDay(input("Enter day (Monday, Tuesday, etc): "))
+            break
+        except ValueError:
+            print("Invalid input; please enter day (Monday, Tuesday, etc):")
+
+    while True:
+        start = input("Enter start time (HH:MM) in 24 hour format: ")
+        try:
+            # validate format
+            datetime.strptime(start, "%H:%M")
+            break
+        except ValueError:
+            print("Invalid time. Please enter time in HH:MM (24-hour format).")
+
+    while True:
+        try:
+            duration = int(input("Enter duration (in minutes): "))
+            if duration <= _MAX_MINUTES_IN_A_DAY:
+                break
+            else:
+                print("Invalid input. Please enter a valid duration (in minutes). "
+                      f"Maximum duration is one day ({_MAX_MINUTES_IN_A_DAY} minutes).")
+
+        except ValueError:
+            print("Invalid time. Please enter time in full minutes.")
+
+    room = input("Enter room: ")
+
+    lecturer = input("Enter lecturer: ")
+
+    return Course(course_name, credits_, week_day, start, duration, room, lecturer)
+
+
+def generate_csv(user_input: Timetable, name: str = "timetable.csv") -> Path:
+    """Generates a csv file from the user's inputs and return its path"""
+    df = user_input.to_df()
+
+    choice = input("\n Would you like to name the csv file? (y/n): ").lower()
+    if choice == "y":
+        name = input("Enter name of csv file: ") + ".csv"
+
+    path = DATA_DIR / name
+    df.to_csv(path, index=False)
+
+    return path
+
+
+def load_course_data(file: str) -> pd.DataFrame:
+    """Load course data from csv file in a pandas dataframe"""
+    filepath = DATA_DIR / file
+    df = pd.read_csv(filepath)
+    df = df.set_index("course_name")
+    return df
+
+
+def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
+    """Prepare a dataframe for plotting"""
+    df = data.copy()
+    df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
+    df["duration_minutes"] = pd.to_timedelta(df["duration_minutes"], unit="minutes")
+    df["end_time"] = df["start_time"] + df["duration_minutes"]
+    return df
+
+class LayoutType(StrEnum):
+    """Distinct Layout Type Options by name."""
+    STATIC = "static"
+    DYNAMIC = "dynamic"
+
+def choose_layout(layout_type, courses, theme, figsize_timetable, user) -> TimetableLayout:
+    """Choose a layout type by name."""
+    if layout_type == LayoutType.STATIC:
+        return StaticTimestable(courses, theme, figsize_timetable, user)
+    elif layout_type == LayoutType.DYNAMIC:
+        return DynamicTimetable(courses, theme, figsize_timetable, user)
+    raise ValueError(f"Unknown timetable type: {layout_type}")
+
+
+class TimetableTheme(StrEnum):
+    """Distinct Timetable Theme Options by name."""
+    DARK = "dark"
+    LIGHT = "light"
+    RAINBOW = "rainbow"
+    AUTUMN = "autumn"
+    NEUTRAL = "neutral"
+    NATURE = "nature"
+
+def choose_theme(theme) -> Theme:
+    """Choose a theme by name."""
+    if theme == TimetableTheme.DARK:
+        return DarkTheme()
+    elif theme == TimetableTheme.LIGHT:
+        return LightTheme()
+    elif theme == TimetableTheme.RAINBOW:
+        return RainbowTheme()
+    elif theme == TimetableTheme.AUTUMN:
+        return AutumnTheme()
+    elif theme == TimetableTheme.NEUTRAL:
+        return NeutralTheme()
+    elif theme == TimetableTheme.NATURE:
+        return NatureTheme()
+    raise ValueError(f"Unknown theme: {theme}")
+
+def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=True):
+    if not auto_generate:
+        all_users_courses = Timetable()
+        while True:
+            users_course = get_user_inputs()
+            all_users_courses.add_course(users_course)
+
+            choice = input("\nAdd another course? (y/n): ")
+            if choice != "y":
+                break
+
+        df = all_users_courses.to_df()
+        df = prepare_df(df)
+    else:
+        df = load_course_data(filename)
+        df = prepare_df(df)
+
+    courses = []
+
+    for i, (subject, row) in enumerate(df.iterrows()):
+        course = Course(
+            subject,
+            row["_credits"],
+            row["week_day"],
+            row["start_time"],
+            row["duration_minutes"],
+            row["room"],
+            row["lecturer"]
+        )
+        courses.append(course)
+
+    timetable = choose_layout(layout_type, courses, choose_theme(theme), figsize_timetable, user)
+    timetable.display_timetable()
+
+
+
+if __name__ == "__main__":
+    main(
+        layout_type="dynamic",
+        filename="planner_template - chavez_pope.csv",
+        theme="autumn",
+        figsize_timetable=(8, 6),
+        user="Marieke",
+        auto_generate=True
+    )
