@@ -8,6 +8,12 @@ from datetime import datetime
 import pandas as pd
 from enum import StrEnum
 
+import pandas as pd
+
+from src.study_planner.dynamic_timetable import DynamicTimetable
+from src.study_planner.static_timetable import StaticTimestable
+from src.study_planner.themes import *
+from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
 
 
 _MAX_MINUTES_IN_A_DAY = 1440
