@@ -57,7 +57,13 @@ class Theme(ABC):
 
 class TimetableLayout(ABC):
     """Abstract base class for timetable layouts"""
-    def __init__(self, courses, theme, figsize_timetable, user):
+    def __init__(
+        self,
+        courses: list[Course],
+        theme: Theme,
+        figsize_timetable: tuple[float, float],
+        user: str
+    ):
         self.courses = courses
         self.theme = theme
         self.figsize_timetable = figsize_timetable
