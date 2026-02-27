@@ -2,6 +2,9 @@ from src.study_planner.timetable import Theme
 import numpy as np
 import matplotlib.pyplot as plt
 
+from src.study_planner.timetable import Theme
+
+
 class DarkTheme(Theme):
     """Dark theme for the timetable"""
     def __init__(self):
