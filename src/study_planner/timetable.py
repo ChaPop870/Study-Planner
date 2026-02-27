@@ -94,8 +94,8 @@ class TimetableLayout(ABC):
         end_minutes = []
 
         for subject in self.courses:
-            start = minutes_since_midnight(subject.start_time)
-            end = minutes_since_midnight(subject.start_time) + subject.duration_minutes
+            start: int = minutes_since_midnight(subject.start_time)
+            end: int = minutes_since_midnight(subject.start_time) + subject.duration_minutes
 
             # Detect rollover past midnight
             if end < start:
