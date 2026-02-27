@@ -43,7 +43,6 @@ class Timetable:
         """Generate dataframe representation of timetable."""
         courses_dict = asdict(self)
         courses_df = pd.DataFrame(courses_dict["courses"]).set_index("course_name")
-        print(courses_df)
         return courses_df
 
 
