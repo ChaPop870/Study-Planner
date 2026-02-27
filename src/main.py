@@ -48,7 +48,7 @@ def get_user_inputs() -> Course:
     while True:
         try:
             duration = int(input("Enter duration (in minutes): "))
-            if duration <= _MAX_MINUTES_IN_A_DAY:
+            if 0 <= duration <= _MAX_MINUTES_IN_A_DAY:
                 break
             else:
                 print("Invalid input. Please enter a valid duration (in minutes). "
