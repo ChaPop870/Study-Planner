@@ -23,7 +23,7 @@ class WeekDay(StrEnum):
 class Course:
     """ One university course."""
     course_name: str
-    credits_: int
+    credits: int
     week_day: WeekDay
     start_time: str
     duration_minutes: int
