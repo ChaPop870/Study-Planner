@@ -59,9 +59,9 @@ class StaticTimestable(TimetableLayout):
             color=self.theme.themecolor,
             fontweight="bold",
         )
-        title.set_path_effects(
-            [pe.withStroke(linewidth=2, foreground=self.theme.fontcolor)
-             ])
+        title.set_path_effects([
+            pe.withStroke(linewidth=2, foreground=self.theme.fontcolor)
+        ])
 
     def create_timetable_layout(self, ax2):
         """Creating timetable layout."""

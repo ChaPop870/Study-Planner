@@ -23,7 +23,7 @@ class WeekDay(StrEnum):
 class Course:
     """One university course."""
     course_name: str
-    credits: int
+    credits_: int
     week_day: WeekDay
     start_time: str
     duration_minutes: int
@@ -69,7 +69,7 @@ class TimetableLayout(ABC):
         self.figsize_timetable = figsize_timetable
         self.user = user
 
-    def calc_yrange_for_plotting(self):
+    def calc_yrange_for_plotting(self) -> np.ndarray:
         """Calculate the time range on the y-axis for plotting."""
         start_minutes = []
         end_minutes = []
