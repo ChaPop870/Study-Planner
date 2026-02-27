@@ -37,6 +37,7 @@ class Timetable:
     courses: list[Course] = field(default_factory=list)
 
     def add_course(self, course: Course):
+        """Adds a course to the timetable."""
         self.courses.append(course)
 
     def to_df(self) -> pd.DataFrame:
