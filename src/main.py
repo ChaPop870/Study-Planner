@@ -31,7 +31,7 @@ def get_user_inputs() -> Course:
 
     while True:
         try:
-            week_day = WeekDay(input("Enter day (Monday, Tuesday, etc): "))
+            week_day = WeekDay(input("Enter day (Monday, Tuesday, etc): ").capitalize())
             break
         except ValueError:
             print("Invalid input; please enter day (Monday, Tuesday, etc):")
