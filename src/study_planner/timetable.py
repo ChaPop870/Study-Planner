@@ -71,25 +71,6 @@ class TimetableLayout(ABC):
 
     def calc_yrange_for_plotting(self):
         """Calculate the time range on the y-axis for plotting."""
-        # earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
-        # latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
-        #
-        # for subject in self.courses:
-        #     endtime = datetime.combine(datetime.today().date(),
-        #                                datetime.time(subject.start_time)) + subject.duration_minutes
-        #     y = subject.start_time.hour * 60 + subject.start_time.minute  # Any better name that self.y?
-        #
-        #     if subject.start_time < earliest_time:
-        #         earliest_time = subject.start_time
-        #     if endtime > latest_time:
-        #         latest_time = endtime
-        #
-        # y_bounds = [
-        #     (earliest_time - timedelta(hours=2)).hour,
-        #     (latest_time + timedelta(hours=2)).hour,
-        # ]
-        # y_ticks = np.arange(y_bounds[0] * 60, y_bounds[1] * 60 + 1, 60)
-
         start_minutes = []
         end_minutes = []
 
