@@ -8,7 +8,7 @@ import pandas as pd
 
 
 class WeekDay(StrEnum):
-    """Distinct week days by name."""
+    """Distinct weekdays by name."""
 
     SUNDAY = "Sunday"
     MONDAY = "Monday"
@@ -29,6 +29,7 @@ class Course:
     duration_minutes: int
     room: str
     lecturer: str
+
 
 @dataclass
 class Timetable:

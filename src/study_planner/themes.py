@@ -1,4 +1,3 @@
-from src.study_planner.timetable import Theme
 import numpy as np
 import matplotlib.pyplot as plt
 
