@@ -107,7 +107,10 @@ class TimetableLayout(ABC):
         earliest_time: int = min(start_minutes) - 120
         latest_time: int = max(end_minutes) + 120
 
-        y_ticks = np.arange(earliest_time, latest_time + 1, 60)
+        earliest_hour: int = (earliest_time // 60) * 60
+        latest_hour: int = ((latest_time + 59) // 60) * 60
+
+        y_ticks = np.arange(earliest_hour, latest_hour + 1, 60)
 
         return y_ticks
 
