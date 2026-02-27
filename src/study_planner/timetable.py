@@ -21,7 +21,7 @@ class WeekDay(StrEnum):
 
 @dataclass
 class Course:
-    """ One university course."""
+    """One university course."""
     course_name: str
     credits: int
     week_day: WeekDay
@@ -30,9 +30,10 @@ class Course:
     room: str
     lecturer: str
 
+
 @dataclass
 class Timetable:
-    """ Timetable containing multiple courses over the week. """
+    """Timetable containing multiple courses over the week."""
     courses: list[Course] = field(default_factory=list)
 
     def add_course(self, course: Course):
@@ -48,15 +49,11 @@ class Timetable:
 
 class Theme(ABC):
     """Abstract base class for themes"""
+
     @abstractmethod
     def color_list(self, number_of_courses: int) -> list:
         """Creates a list of n colors where n is the number of courses"""
         pass
-
-def minutes_since_midnight(date: str) -> int:
-    """Return the number of minutes since midnight"""
-    date_as_datetime = datetime.strptime(date, "%H:%M")
-    return date_as_datetime.hour * 60 + date_as_datetime.minute
 
 
 class TimetableLayout(ABC):
