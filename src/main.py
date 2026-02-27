@@ -89,9 +89,9 @@ def load_course_data(file: str) -> pd.DataFrame:
 def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
     """Prepare a dataframe for plotting"""
     df = data.copy()
-    df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
-    df["duration_minutes"] = pd.to_timedelta(df["duration_minutes"], unit="minutes")
-    df["end_time"] = df["start_time"] + df["duration_minutes"]
+    # df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
+    # df["duration_minutes"] = pd.to_timedelta(df["duration_minutes"], unit="minutes")
+    #df["end_time"] = df["start_time"] + df["duration_minutes"]
     return df
 
 
@@ -205,7 +205,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
         print("\nHow do you want the display?")
 
-        for i, display in enumerate(["static", "dynamic"], start=1):
+        for i, display in enumerate(LayoutType, start=1):
             print(f"{i}. {display}")
 
         while True:
@@ -226,17 +226,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
             except ValueError:
                 print("Invalid choice. Please try again.")
 
-        # all_users_courses = Timetable()
-        # while True:
-        #     users_course = get_user_inputs()
-        #     all_users_courses.add_course(users_course)
-        #
-        #     choice = input("\nAdd another course? (y/n): ")
-        #     if choice != "y":
-        #         break
-        #
-        # df = all_users_courses.to_df()
-        # df = prepare_df(df)
+
     else:
         df = load_course_data(filename)
         df = prepare_df(df)
@@ -263,7 +253,7 @@ if __name__ == "__main__":
     main(
         layout_type="dynamic",
         filename="planner_template - chavez_pope.csv",
-        theme=TimetableTheme.AUTUMN,
+        theme="autumn",
         figsize_timetable=(8, 6),
         user="Marieke",
         auto_generate=False

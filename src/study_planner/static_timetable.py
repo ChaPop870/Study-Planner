@@ -3,6 +3,8 @@ import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
 
 from src.study_planner.timetable import TimetableLayout, WeekDay
+from study_planner.timetable import minutes_since_midnight
+from src.study_planner.themes import *
 
 
 class StaticTimestable(TimetableLayout):
@@ -63,11 +65,11 @@ class StaticTimestable(TimetableLayout):
 
     def create_timetable_layout(self, ax2):
         """Creating timetable layout."""
-        y_bounds, y_ticks = self.calc_yrange_for_plotting()
+        y_ticks = self.calc_yrange_for_plotting()
         ax2.set_yticks(y_ticks)
         ax2.set_ylim(y_ticks[0], y_ticks[-1])
         ax2.invert_yaxis()
-        ax2.set_yticklabels([f"{int(h / 60):02d}:00" for h in y_ticks])
+        ax2.set_yticklabels([f"{int(h / 60 % 24):02d}:00" for h in y_ticks])
         ax2.set_ylabel("Hour")
         ax2.set_xticks([])
 
@@ -79,12 +81,12 @@ class StaticTimestable(TimetableLayout):
 
         for i_subject, subject in enumerate(self.courses):
             width = self.figsize_timetable[0] / len(WeekDay)  # One day wide
-            height = subject.duration_minutes.total_seconds() / 60  # Duration in minutes
+            height = subject.duration_minutes
             day_to_x = {
                 day: i * self.figsize_timetable[0] / len(WeekDay) for i, day in enumerate(WeekDay)
             }
             x = day_to_x[subject.week_day]
-            y = subject.start_time.hour * 60 + subject.start_time.minute  # Any better name that self.y?
+            y = minutes_since_midnight(subject.start_time)
 
             period = Rectangle(
                 xy=(x, y),

@@ -53,6 +53,10 @@ class Theme(ABC):
         """Creates a list of n colors where n is the number of courses"""
         pass
 
+def minutes_since_midnight(date: str) -> int:
+    """Return the number of minutes since midnight"""
+    date_as_datetime = datetime.strptime(date, "%H:%M")
+    return date_as_datetime.hour * 60 + date_as_datetime.minute
 
 
 class TimetableLayout(ABC):
@@ -65,26 +69,48 @@ class TimetableLayout(ABC):
 
     def calc_yrange_for_plotting(self):
         """Calculate the time range on the y-axis for plotting."""
-        earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
-        latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
+        # earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
+        # latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
+        #
+        # for subject in self.courses:
+        #     endtime = datetime.combine(datetime.today().date(),
+        #                                datetime.time(subject.start_time)) + subject.duration_minutes
+        #     y = subject.start_time.hour * 60 + subject.start_time.minute  # Any better name that self.y?
+        #
+        #     if subject.start_time < earliest_time:
+        #         earliest_time = subject.start_time
+        #     if endtime > latest_time:
+        #         latest_time = endtime
+        #
+        # y_bounds = [
+        #     (earliest_time - timedelta(hours=2)).hour,
+        #     (latest_time + timedelta(hours=2)).hour,
+        # ]
+        # y_ticks = np.arange(y_bounds[0] * 60, y_bounds[1] * 60 + 1, 60)
+
+        start_minutes = []
+        end_minutes = []
 
         for subject in self.courses:
-            endtime = datetime.combine(datetime.today().date(),
-                                       datetime.time(subject.start_time)) + subject.duration_minutes
-            y = subject.start_time.hour * 60 + subject.start_time.minute  # Any better name that self.y?
+            start = minutes_since_midnight(subject.start_time)
+            end = minutes_since_midnight(subject.start_time) + subject.duration_minutes
 
-            if subject.start_time < earliest_time:
-                earliest_time = subject.start_time
-            if endtime > latest_time:
-                latest_time = endtime
+            # Detect rollover past midnight
+            if end < start:
+                end += 24 * 60
 
-        y_bounds = [
-            (earliest_time - timedelta(hours=2)).hour,
-            (latest_time + timedelta(hours=2)).hour,
-        ]
-        y_ticks = np.arange(y_bounds[0] * 60, y_bounds[1] * 60 + 1, 60)
+            start_minutes.append(start)
+            end_minutes.append(end)
 
-        return y_bounds, y_ticks
+        earliest_time = min(start_minutes)
+        earliest_time -= 120
+
+        latest_time = max(end_minutes)
+        latest_time += 120
+
+        y_ticks = np.arange(earliest_time, latest_time + 1, 60)
+
+        return y_ticks
 
     @abstractmethod
     def display_timetable(self):
