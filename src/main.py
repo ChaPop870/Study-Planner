@@ -25,7 +25,7 @@ def get_user_inputs() -> Course:
     while True:
         try:
             credits_ = int(input("Enter credits: "))
-            if credits_ > 0:
+            if credits_ >= 0:
                 break
             else:
                 print("Invalid input. Credits must be a positive integer")
