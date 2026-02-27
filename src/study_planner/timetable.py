@@ -45,6 +45,10 @@ class Timetable:
         courses_df = pd.DataFrame(courses_dict["courses"]).set_index("course_name")
         return courses_df
 
+    def __len__(self) -> int:
+        """Return the number of courses in the timetable."""
+        return len(self.courses)
+
 
 class Theme(ABC):
     """Abstract base class for themes"""
