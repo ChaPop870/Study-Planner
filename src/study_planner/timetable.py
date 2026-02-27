@@ -128,3 +128,9 @@ class TimetableLayout(ABC):
     def display_courses(self, ax):
         """Plotting the courses into the timetable layout"""
         pass
+
+
+def minutes_since_midnight(date: str) -> int:
+    """Return the number of minutes since midnight"""
+    date_as_datetime = datetime.strptime(date, "%H:%M")
+    return date_as_datetime.hour * 60 + date_as_datetime.minute
