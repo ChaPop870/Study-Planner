@@ -95,6 +95,24 @@ def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def show_welcome() -> str:
+    """Prints a welcome message to the user."""
+    return "Welcome to Chavez & Marieke's timetable app!\n"
+
+
+def instructions() -> str:
+    """Prints an instructions message to the user."""
+    return ("To display the desired timetable, press the index of the timetable. \n"
+            "To generate your own timetable, press '0' \n"
+            "To exit the app, press '-1'")
+
+
+def available_timetable_list(directory: Path) -> list[str]:
+    """List the csv files from the given directory"""
+    file_list = [path.name for path in directory.glob("*.csv")]
+    return file_list
+
+
 class LayoutType(StrEnum):
     """Distinct Layout Type Options by name."""
     STATIC = "static"
@@ -136,17 +154,89 @@ def choose_theme(theme) -> Theme:
 
 def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=True):
     if not auto_generate:
-        all_users_courses = Timetable()
+        print(show_welcome())
+        print("The following timetables are available:\n")
+        timetable_list = available_timetable_list(DATA_DIR)
+        for i, file in enumerate(timetable_list, start = 1):
+            print(f"{i}. {file}")
+            if i == len(timetable_list):
+                print()
+
+        print(instructions())
+
         while True:
-            users_course = get_user_inputs()
-            all_users_courses.add_course(users_course)
+            try:
+                selection = int(input("Choice: "))
 
-            choice = input("\nAdd another course? (y/n): ")
-            if choice != "y":
-                break
+                if selection == -1:
+                    print("\nThank you. We hope to see you again!")
+                    return
 
-        df = all_users_courses.to_df()
-        df = prepare_df(df)
+                elif selection == 0:
+                    all_users_courses = Timetable()
+                    while True:
+                        users_course = get_user_inputs()
+                        all_users_courses.add_course(users_course)
+
+                        choice = input("\nAdd another course? (y/n): ")
+                        if choice != "y":
+                            break
+
+                    df = all_users_courses.to_df()
+                    df = prepare_df(df)
+                    break
+
+                elif 1 <= selection <= len(timetable_list):
+                    filename = timetable_list[selection - 1]
+                    df = load_course_data(filename)
+                    break
+
+                else:
+                    print("Choice out of range. Please select the index from the available files.\n")
+
+                    for i, file in enumerate(timetable_list, start=1):
+                        print(f"{i}. {file}")
+
+                        if i == len(timetable_list):
+                            print()
+
+            except ValueError:
+                print("Invalid choice. Please try again.")
+
+        print("\nHow do you want the display?")
+
+        for i, display in enumerate(["static", "dynamic"], start=1):
+            print(f"{i}. {display}")
+
+        while True:
+            try:
+                selection = int(input("Choice: "))
+
+                if selection == 1:
+                    layout_type = "static"
+                    break
+
+                elif selection == 2:
+                    layout_type = "dynamic"
+                    break
+
+                else:
+                    print("Choice out of range. Please select '1' for a static display or '2' for a dynamic display.\n")
+
+            except ValueError:
+                print("Invalid choice. Please try again.")
+
+        # all_users_courses = Timetable()
+        # while True:
+        #     users_course = get_user_inputs()
+        #     all_users_courses.add_course(users_course)
+        #
+        #     choice = input("\nAdd another course? (y/n): ")
+        #     if choice != "y":
+        #         break
+        #
+        # df = all_users_courses.to_df()
+        # df = prepare_df(df)
     else:
         df = load_course_data(filename)
         df = prepare_df(df)
@@ -156,7 +246,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
     for i, (subject, row) in enumerate(df.iterrows()):
         course = Course(
             subject,
-            row["_credits"],
+            row["credits_"],
             row["week_day"],
             row["start_time"],
             row["duration_minutes"],
@@ -176,5 +266,5 @@ if __name__ == "__main__":
         theme=TimetableTheme.AUTUMN,
         figsize_timetable=(8, 6),
         user="Marieke",
-        auto_generate=True
+        auto_generate=False
     )
