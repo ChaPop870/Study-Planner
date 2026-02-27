@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from src.study_planner.timetable import TimetableLayout, WeekDay
-from study_planner.timetable import minutes_since_midnight
+from src.study_planner.timetable import minutes_since_midnight
 
 
 class DynamicTimetable(TimetableLayout):
