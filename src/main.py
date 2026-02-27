@@ -30,7 +30,7 @@ def get_user_inputs() -> Course:
             else:
                 print("Invalid input. Credits must be a positive integer")
         except ValueError:
-            print("Invalid input; please enter an integer.")
+            print("Invalid input. Credits must be a positive integer")
 
     while True:
         try:
@@ -54,8 +54,8 @@ def get_user_inputs() -> Course:
             if 0 <= duration <= _MAX_MINUTES_IN_A_DAY:
                 break
             else:
-                print("Invalid input. Please enter a valid duration (in minutes). "
-                      f"Maximum duration is one day ({_MAX_MINUTES_IN_A_DAY} minutes).")
+                print("Invalid input. Please enter a duration between 0 and "
+                      f"{_MAX_MINUTES_IN_A_DAY} minutes.")
 
         except ValueError:
             print("Invalid time. Please enter time in full minutes.")
