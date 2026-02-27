@@ -3,7 +3,7 @@ import matplotlib.patheffects as pe
 import matplotlib.pyplot as plt
 
 from src.study_planner.timetable import TimetableLayout, WeekDay
-from study_planner.timetable import minutes_since_midnight
+from src.study_planner.timetable import minutes_since_midnight
 from src.study_planner.themes import *
 
 
