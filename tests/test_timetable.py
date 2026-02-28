@@ -30,6 +30,8 @@ math = Course(
     lecturer="John Smith"
 )
 
+test_timetable = Timetable([dynamics, math])
+
 
 # Tests for WeekDay class
 def test_valid_weekday_value():
