@@ -102,3 +102,34 @@ def test_minutes_since_midnight():
 def test_minutes_since_midnight_invalid_format():
     with pytest.raises(ValueError):
         minutes_since_midnight("25:00")
+
+
+# Testing calc_yrange_for_plotting function
+def calc_yrange_for_plotting():
+    start = minutes_since_midnight("23:00")
+    end = minutes_since_midnight("1:00")
+
+    # Midnight Rollover
+    if end < start:
+        end += 24 * 60
+
+    start_minutes.append(start)
+    end_minutes.append(end)
+
+    assert start_minutes[0] == 1380
+    assert end_minutes[0] == 1500
+
+    # 2-hour padding
+    earliest_time = min(start_minutes) - 120
+    latest_time = max(end_minutes) + 120
+
+    earliest_hour = (earliest_time // 60) * 60
+    latest_hour = ((latest_time + 59) // 60) * 60
+
+    assert earliest_hour == 1260
+    assert latest_hour == 1620
+
+    # Y-ticks for labelling y-axis.
+    y_ticks = np.arange(earliest_hour, latest_hour + 1, 60)
+
+    assert y_ticks == np.array([1260, 1320, 1380, 1440, 1500, 1560, 1620])
