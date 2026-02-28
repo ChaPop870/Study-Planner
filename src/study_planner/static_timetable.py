@@ -63,7 +63,7 @@ class StaticTimestable(TimetableLayout):
             pe.withStroke(linewidth=2, foreground=self.theme.fontcolor)
         ])
 
-    def create_timetable_layout(self, ax2):
+    def create_timetable_layout(self, ax2: Axes) -> None:
         """Creating timetable layout."""
         y_ticks = self.calc_yrange_for_plotting()
         ax2.set_yticks(y_ticks)
