@@ -1,3 +1,33 @@
+import pytest
+
+from src.study_planner.themes import (
+    DarkTheme,
+    LightTheme,
+    RainbowTheme,
+    AutumnTheme,
+    NeutralTheme,
+    NatureTheme,
+)
+from src.study_planner.timetable import Theme
+
+
+# Helper
+THEME_CLASSES = [
+    DarkTheme,
+    LightTheme,
+    RainbowTheme,
+    AutumnTheme,
+    NeutralTheme,
+    NatureTheme,
+]
+
+
+# Basic Structural Tests
+@pytest.mark.parametrize("ThemeClass", THEME_CLASSES)
+def test_theme_is_subclass(ThemeClass):
+    theme = ThemeClass()
+    assert isinstance(theme, Theme)
+
 
 @pytest.mark.parametrize("ThemeClass", THEME_CLASSES)
 def test_theme_has_required_attributes(ThemeClass):
