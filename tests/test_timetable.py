@@ -34,6 +34,13 @@ math = Course(
 
 test_timetable = Timetable([dynamics, math])
 
+# test_layout = TimetableLayout(
+#     courses=[dynamics, math],
+#     theme=None,
+#     figsize_timetable=(8, 6),
+#     user="tester"
+# )
+
 
 # Tests for WeekDay class
 def test_valid_weekday_value():
@@ -60,17 +67,38 @@ def test_is_course():
 
 # Tests for Timetable Class
 def test_add_course():
-    timetable = Timetable()
-    timetable.add_course(dynamics)
-    timetable.add_course(math)
+    new_timetable = Timetable()
+    new_timetable.add_course(dynamics)
+    new_timetable.add_course(math)
 
-    assert len(timetable) == 2
+    assert len(new_timetable) == 2
 
 def test_is_timetable():
-    assert type(Timetable([dynamics, math])) == Timetable
+    assert type(test_timetable) == Timetable
 
 def test_to_df_generates_dataframe():
-    timetable = Timetable([dynamics, math])
-    df = timetable.to_df()
+    df = test_timetable.to_df()
 
     assert isinstance(df, pd.DataFrame)
+
+
+# Tests for Timetablelayout Class
+
+# def is_timetable_layout():
+#     test_layout = TimetableLayout()
+#
+#     assert type()
+
+# Tests for yrange_plotting function
+# def test_yrange_for_plotting():
+#
+
+
+# Testing functions
+def test_minutes_since_midnight():
+    assert minutes_since_midnight("0:00") == 0
+    assert minutes_since_midnight("2:20") == 140
+
+def test_minutes_since_midnight_invalid_format():
+    with pytest.raises(ValueError):
+        minutes_since_midnight("25:00")
