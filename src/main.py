@@ -249,7 +249,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
         courses.append(course)
 
     timetable = choose_layout(layout_type, courses, choose_theme(theme), figsize_timetable, user)
-    timetable.display_timetable()
+    timetable.display_timetable().show()
 
 
 if __name__ == "__main__":
@@ -259,5 +259,5 @@ if __name__ == "__main__":
         theme="autumn",
         figsize_timetable=(8, 6),
         user="Marieke",
-        auto_generate=False
+        auto_generate=True
     )

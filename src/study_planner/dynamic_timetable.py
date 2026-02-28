@@ -1,6 +1,7 @@
 from datetime import datetime, time, timedelta
 
 import matplotlib.colors as mcolors
+from matplotlib.figure import Figure
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
@@ -10,7 +11,7 @@ from src.study_planner.timetable import minutes_since_midnight
 
 class DynamicTimetable(TimetableLayout):
     """Dynamic Timetable Layout"""
-    def display_timetable(self):
+    def display_timetable(self) -> Figure:
         """Plotting the timetable with courses."""
         height_ratios = [1, 8]
 
@@ -27,7 +28,7 @@ class DynamicTimetable(TimetableLayout):
         self.create_timetable_layout(fig)
         self.display_courses(fig)
 
-        return fig.show()
+        return fig
 
     def create_timetable_header(self, fig):
         """Creating timetable header with week days."""
@@ -64,11 +65,11 @@ class DynamicTimetable(TimetableLayout):
         """Creating timetable layout"""
 
         y_ticks = self.calc_yrange_for_plotting()
-        daylines = [
+        day_lines = [
             i * self.figsize_timetable[0] * 100 / len(WeekDay)
             for i, _ in enumerate(WeekDay)
         ]
-        for x in daylines:
+        for x in day_lines:
             fig.add_shape(
                 type="line",
                 x0=x,

@@ -1,6 +1,7 @@
+from matplotlib.axes import Axes
+from matplotlib.figure import Figure
 from matplotlib.patches import Rectangle
 import matplotlib.patheffects as pe
-import matplotlib.pyplot as plt
 
 from src.study_planner.timetable import TimetableLayout, WeekDay
 from src.study_planner.timetable import minutes_since_midnight
