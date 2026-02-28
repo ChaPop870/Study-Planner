@@ -75,8 +75,8 @@ class StaticTimestable(TimetableLayout):
 
     def display_courses(self, ax2: Axes) -> None:
         """Plotting the courses into the timetable layout"""
-        daylines = [i * self.figsize_timetable[0] / len(WeekDay) for i, day in enumerate(WeekDay)]
-        for x in daylines:
+        day_lines = [i * self.figsize_timetable[0] / len(WeekDay) for i, day in enumerate(WeekDay)]
+        for x in day_lines:
             ax2.axvline(x, color=self.theme.fontcolor, alpha=0.5)
 
         for i_subject, subject in enumerate(self.courses):
