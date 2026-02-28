@@ -5,16 +5,16 @@ from enum import StrEnum
 import pandas as pd
 
 from src.study_planner.dynamic_timetable import DynamicTimetable
-from src.study_planner.static_timetable import StaticTimestable
+from src.study_planner.static_timetable import StaticTimetable
 from src.study_planner.themes import *
 from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
 
 
-_MAX_MINUTES_IN_A_DAY = 1440
+_MAX_MINUTES_IN_A_DAY: int = 1440
 
-BASE_DIR = Path(__file__).resolve().parents[1]
+BASE_DIR: Path = Path(__file__).resolve().parents[1]
 
-DATA_DIR = BASE_DIR / "data"
+DATA_DIR: Path = BASE_DIR / "data"
 
 
 def get_user_inputs() -> Course:
@@ -124,7 +124,7 @@ class LayoutType(StrEnum):
 def choose_layout(layout_type, courses, theme, figsize_timetable, user) -> TimetableLayout:
     """Choose a layout type by name."""
     if layout_type == LayoutType.STATIC:
-        return StaticTimestable(courses, theme, figsize_timetable, user)
+        return StaticTimetable(courses, theme, figsize_timetable, user)
     elif layout_type == LayoutType.DYNAMIC:
         return DynamicTimetable(courses, theme, figsize_timetable, user)
     raise ValueError(f"Unknown timetable type: {layout_type}")
@@ -254,7 +254,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
 if __name__ == "__main__":
     main(
-        layout_type="dynamic",
+        layout_type="static",
         filename="planner_template - chavez_pope.csv",
         theme="autumn",
         figsize_timetable=(8, 6),

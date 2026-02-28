@@ -8,7 +8,7 @@ from src.study_planner.timetable import minutes_since_midnight
 from src.study_planner.themes import *
 
 
-class StaticTimestable(TimetableLayout):
+class StaticTimetable(TimetableLayout):
     def display_timetable(self) -> Figure:
         """Plotting the timetable with courses."""
         height_ratios = [1, 8]
