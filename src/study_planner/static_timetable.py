@@ -26,7 +26,7 @@ class StaticTimestable(TimetableLayout):
         return fig
 
 
-    def display_timetable_header(self, ax1):
+    def display_timetable_header(self, ax1: Axes) -> None:
         """Creating timetable header"""
         day_width = self.figsize_timetable[0] / len(WeekDay)
         text_offset = [day_width / 2, 1/2]
