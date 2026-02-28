@@ -8,7 +8,7 @@ from src.study_planner.themes import *
 
 
 class StaticTimestable(TimetableLayout):
-    def display_timetable(self):
+    def display_timetable(self) -> Figure:
         """Plotting the timetable with courses."""
         height_ratios = [1, 8]
 
