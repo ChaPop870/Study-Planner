@@ -64,3 +64,9 @@ def test_add_course():
 
 def test_is_timetable():
     assert type(Timetable([dynamics, math])) == Timetable
+
+def test_to_df_generates_dataframe():
+    timetable = Timetable([dynamics, math])
+    df = timetable.to_df()
+
+    assert isinstance(df, pd.DataFrame)
