@@ -23,7 +23,7 @@ class StaticTimestable(TimetableLayout):
         self.create_timetable_layout(ax2)
         self.display_courses(ax2)
 
-        return fig.show()
+        return fig
 
 
     def display_timetable_header(self, ax1):
