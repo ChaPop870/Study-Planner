@@ -6,7 +6,6 @@ from src.study_planner.timetable import (
     WeekDay,
     Course,
     Timetable,
-    TimetableLayout,
     minutes_since_midnight
 )
 
@@ -34,12 +33,9 @@ math = Course(
 
 test_timetable = Timetable([dynamics, math])
 
-# test_layout = TimetableLayout(
-#     courses=[dynamics, math],
-#     theme=None,
-#     figsize_timetable=(8, 6),
-#     user="tester"
-# )
+# For testing yticks function
+start_minutes = []
+end_minutes = []
 
 
 # Tests for WeekDay class
@@ -59,6 +55,7 @@ def test_is_valid_attribute():
     assert dynamics.course_name == "Dynamics"
     assert dynamics.credits_ == 6
     assert dynamics.week_day == WeekDay.TUESDAY
+    assert dynamics.start_time == "20:35"
 
 def test_is_course():
     assert type(dynamics) == Course
@@ -80,18 +77,6 @@ def test_to_df_generates_dataframe():
     df = test_timetable.to_df()
 
     assert isinstance(df, pd.DataFrame)
-
-
-# Tests for Timetablelayout Class
-
-# def is_timetable_layout():
-#     test_layout = TimetableLayout()
-#
-#     assert type()
-
-# Tests for yrange_plotting function
-# def test_yrange_for_plotting():
-#
 
 
 # Testing functions
