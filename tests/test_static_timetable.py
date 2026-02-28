@@ -7,10 +7,8 @@ import pytest
 from src.study_planner.static_timetable import StaticTimetable
 from src.study_planner.timetable import Theme
 from src.study_planner.timetable import Course, WeekDay, Timetable
-from src.study_planner.themes import LightTheme
 
 matplotlib.use("Agg")  # Prevent GUI backend during testing
-
 
 
 class SimpleTheme(Theme):
@@ -19,6 +17,7 @@ class SimpleTheme(Theme):
 
     def color_list(self, number_of_courses: int) -> list:
         return ["#88c0d0"] * number_of_courses
+
 
 @pytest.fixture
 def layout():
@@ -53,6 +52,7 @@ def layout():
 
 def test_type_static_timetable(layout):
     assert type(layout) == StaticTimetable
+
 
 def test_display_timetable_returns_figure(layout):
     fig = layout.display_timetable()
