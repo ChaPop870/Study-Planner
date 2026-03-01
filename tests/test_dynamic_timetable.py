@@ -1,5 +1,7 @@
 import pytest
 from plotly.graph_objects import Figure
+import pytest
+
 from src.study_planner.dynamic_timetable import DynamicTimetable
 from src.study_planner.timetable import Course, WeekDay, Theme
 
