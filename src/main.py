@@ -67,18 +67,18 @@ def get_user_inputs() -> Course:
     return Course(course_name, credits_, week_day, start, duration, room, lecturer)
 
 
-def generate_csv(user_input: Timetable, name: str = "timetable.csv") -> Path:
-    """Generates a csv file from the user's inputs and return its path"""
-    df = user_input.to_df()
-
-    choice = input("\n Would you like to name the csv file? (y/n): ").lower()
-    if choice == "y":
-        name = input("Enter name of csv file: ") + ".csv"
-
-    path = DATA_DIR / name
-    df.to_csv(path, index=False)
-
-    return path
+# def generate_csv(user_input: Timetable, name: str = "timetable.csv") -> Path:
+#     """Generates a csv file from the user's inputs and return its path"""
+#     df = user_input.to_df()
+#
+#     choice = input("\n Would you like to name the csv file? (y/n): ").lower()
+#     if choice == "y":
+#         name = input("Enter name of csv file: ") + ".csv"
+#
+#     path = DATA_DIR / name
+#     df.to_csv(path, index=False)
+#
+#     return path
 
 
 def load_course_data(file: str) -> pd.DataFrame:
