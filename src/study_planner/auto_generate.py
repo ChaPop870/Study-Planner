@@ -7,7 +7,7 @@ import pandas as pd
 from src.study_planner.static_timetable import StaticTimetable
 from src.study_planner.dynamic_timetable import DynamicTimetable
 from src.study_planner.themes import *
-from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
+from src.study_planner.timetable import Course,  TimetableLayout, Theme
 
 
 _MAX_MINUTES_IN_A_DAY: int = 1440
