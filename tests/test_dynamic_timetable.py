@@ -1,4 +1,3 @@
-import pytest
 from plotly.graph_objects import Figure
 import pytest
 
