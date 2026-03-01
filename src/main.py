@@ -215,7 +215,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
         while True:
             try:
-                selection = int(input("Choice: "))
+                layout_selection = int(input("\nChoice: "))
 
                 if selection == 1:
                     layout_type = "static"
