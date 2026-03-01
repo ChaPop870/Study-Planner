@@ -141,20 +141,21 @@ class TimetableTheme(StrEnum):
 
 
 def choose_theme(theme: TimetableTheme) -> Theme:
-    """Choose a theme by name."""
-    if theme == TimetableTheme.DARK:
-        return DarkTheme()
-    elif theme == TimetableTheme.LIGHT:
-        return LightTheme()
-    elif theme == TimetableTheme.RAINBOW:
-        return RainbowTheme()
-    elif theme == TimetableTheme.AUTUMN:
-        return AutumnTheme()
-    elif theme == TimetableTheme.NEUTRAL:
-        return NeutralTheme()
-    elif theme == TimetableTheme.NATURE:
-        return NatureTheme()
-    raise ValueError(f"Unknown theme: {theme}")
+    theme_dict: dict[TimetableTheme, Theme] = {
+        TimetableTheme.DARK: DarkTheme(),
+        TimetableTheme.LIGHT: LightTheme(),
+        TimetableTheme.RAINBOW: RainbowTheme(),
+        TimetableTheme.AUTUMN: AutumnTheme(),
+        TimetableTheme.NEUTRAL: NeutralTheme(),
+        TimetableTheme.NATURE: NatureTheme(),
+    }
+
+    try:
+        return theme_dict[theme]
+
+    except KeyError:
+        raise ValueError(f"Unknown theme: {theme}")
+
 
 def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=True):
     if not auto_generate:
