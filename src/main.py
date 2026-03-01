@@ -139,7 +139,8 @@ class TimetableTheme(StrEnum):
     NEUTRAL = "neutral"
     NATURE = "nature"
 
-def choose_theme(theme) -> Theme:
+
+def choose_theme(theme: TimetableTheme) -> Theme:
     """Choose a theme by name."""
     if theme == TimetableTheme.DARK:
         return DarkTheme()
