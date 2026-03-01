@@ -1,4 +1,4 @@
-from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
+from src.study_planner.timetable import Course
 from src.study_planner.helper_functions import LayoutType, TimetableTheme
 from src.study_planner.helper_functions import load_course_data, choose_layout, choose_theme
 

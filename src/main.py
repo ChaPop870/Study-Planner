@@ -1,11 +1,11 @@
-from src.study_planner.auto_generate import auto_generation
-from src.study_planner.terminal_generation import terminal_generation
+from src.study_planner.auto_generation import auto_generation
+from src.study_planner.cli_generation import cli_generation
 
 
 def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=False):
     if not auto_generate:
 
-        terminal_generation(figsize_timetable)
+        cli_generation(figsize_timetable)
 
     else:
 

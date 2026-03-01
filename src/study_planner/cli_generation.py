@@ -74,7 +74,7 @@ def get_user_inputs() -> Course:
     return Course(course_name, credits_, week_day, start, duration, room, lecturer)
 
 
-def terminal_generation(
+def cli_generation(
         figsize_timetable: tuple[int, int]
 ) -> None:
     """Generate study-planner using a command line interface."""
@@ -196,4 +196,4 @@ def terminal_generation(
 
 
 if __name__ == "__main__":
-    terminal_generation((16, 12))
+    cli_generation((16, 12))
