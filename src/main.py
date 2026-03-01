@@ -254,7 +254,6 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
     else:
         df = load_course_data(filename)
-        # df = prepare_df(df)
 
     courses = []
 
