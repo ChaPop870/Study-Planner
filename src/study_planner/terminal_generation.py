@@ -1,4 +1,83 @@
-from src.study_planner.helper_functions import *
+from datetime import datetime
+from pathlib import Path
+
+from src.study_planner.helper_functions import LayoutType, TimetableTheme
+from src.study_planner.helper_functions import (
+    choose_layout,
+    choose_theme,
+    load_course_data
+)
+from src.study_planner.helper_functions import DATA_DIR, _MAX_MINUTES_IN_A_DAY
+from src.study_planner.timetable import Course, Timetable, WeekDay
+
+
+def show_welcome() -> str:
+    """Prints a welcome message to the user."""
+    return "Welcome to Chavez & Marieke's timetable app!\n"
+
+
+def instructions() -> str:
+    """Prints an instructions message to the user."""
+    return ("To display the desired timetable, press the index of the timetable. \n"
+            "To generate your own timetable, press '0' \n"
+            "To exit the app, press '-1'")
+
+
+def available_timetable_list(directory: Path) -> list[str]:
+    """List the csv files from the given directory"""
+    file_list = [path.name for path in directory.glob("*.csv")]
+    return file_list
+
+
+def get_user_inputs() -> Course:
+    """Collect one course entry from the user"""
+
+    course_name = input("Enter course name: ")
+
+    while True:
+        try:
+            credits_ = int(input("Enter credits: "))
+            if credits_ >= 0:
+                break
+            else:
+                print("Invalid input. Credits must be a positive integer")
+        except ValueError:
+            print("Invalid input. Credits must be a positive integer")
+
+    while True:
+        try:
+            week_day = WeekDay(input("Enter day (Monday, Tuesday, etc): ").capitalize())
+            break
+        except ValueError:
+            print("Invalid input; please enter day (Monday, Tuesday, etc):")
+
+    while True:
+        start = input("Enter start time (HH:MM) in 24 hour format: ")
+        try:
+            # validate format
+            datetime.strptime(start, "%H:%M")
+            break
+        except ValueError:
+            print("Invalid time. Please enter time in HH:MM (24-hour format).")
+
+    while True:
+        try:
+            duration = int(input("Enter duration (in minutes): "))
+            if 0 <= duration <= _MAX_MINUTES_IN_A_DAY:
+                break
+            else:
+                print("Invalid input. Please enter a duration between 0 and "
+                      f"{_MAX_MINUTES_IN_A_DAY} minutes.")
+
+        except ValueError:
+            print("Invalid time. Please enter time in full minutes.")
+
+    room = input("Enter room: ")
+
+    lecturer = input("Enter lecturer: ")
+
+    return Course(course_name, credits_, week_day, start, duration, room, lecturer)
+
 
 def terminal_generation(
         figsize_timetable: tuple[int, int]
