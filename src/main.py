@@ -140,6 +140,7 @@ class TimetableTheme(StrEnum):
     NATURE = "nature"
 
 
+
 def choose_theme(theme: TimetableTheme) -> Theme:
     theme_dict: dict[TimetableTheme, Theme] = {
         TimetableTheme.DARK: DarkTheme(),
