@@ -17,6 +17,22 @@ BASE_DIR: Path = Path(__file__).resolve().parents[1]
 DATA_DIR: Path = BASE_DIR / "data"
 
 
+class LayoutType(StrEnum):
+    """Distinct Layout Type Options by name."""
+    STATIC = "static"
+    DYNAMIC = "dynamic"
+
+
+class TimetableTheme(StrEnum):
+    """Distinct Timetable Theme Options by name."""
+    DARK = "dark"
+    LIGHT = "light"
+    RAINBOW = "rainbow"
+    AUTUMN = "autumn"
+    NEUTRAL = "neutral"
+    NATURE = "nature"
+    
+
 def get_user_inputs() -> Course:
     """Collect one course entry from the user"""
 
