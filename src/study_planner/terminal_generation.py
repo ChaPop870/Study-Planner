@@ -118,3 +118,7 @@ def terminal_generation(
 
     timetable = choose_layout(layout_type, courses, choose_theme(theme), figsize_timetable, user)
     timetable.display_timetable().show()
+
+
+if __name__ == "__main__":
+    terminal_generation((16, 12))
