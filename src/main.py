@@ -231,6 +231,26 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
             except ValueError:
                 print("Invalid choice. Please try again.")
 
+        print("\nSelect your desired theme:")
+
+        for i, _theme in enumerate(TimetableTheme, start = 1):
+            print(f"{i}. {_theme}")
+
+        while True:
+            try:
+                theme_selection = int(input("\nChoice: "))
+
+                if 1 <= theme_selection <= len(TimetableTheme):
+                    theme = list(TimetableTheme)[theme_selection - 1]
+                    break
+
+                else:
+                    print("Out of range. Select the number corresponding to the desired theme.")
+
+            except ValueError:
+                print("Invalid choice. Please try again.")
+
+
 
     else:
         df = load_course_data(filename)
