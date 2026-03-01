@@ -89,15 +89,6 @@ def load_course_data(file: str) -> pd.DataFrame:
     return df
 
 
-# def prepare_df(data: pd.DataFrame) -> pd.DataFrame:
-#     """Prepare a dataframe for plotting"""
-#     df = data.copy()
-#     # df["start_time"] = pd.to_datetime(df["start_time"], format="%H:%M")
-#     # df["duration_minutes"] = pd.to_timedelta(df["duration_minutes"], unit="minutes")
-#     #df["end_time"] = df["start_time"] + df["duration_minutes"]
-#     return df
-
-
 def show_welcome() -> str:
     """Prints a welcome message to the user."""
     return "Welcome to Chavez & Marieke's timetable app!\n"
