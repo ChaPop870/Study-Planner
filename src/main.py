@@ -273,7 +273,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
 if __name__ == "__main__":
     main(
-        layout_type="static",
+        layout_type="dynamic",
         filename="planner_template - chavez_pope.csv",
         theme="autumn",
         figsize_timetable=(8, 6),
