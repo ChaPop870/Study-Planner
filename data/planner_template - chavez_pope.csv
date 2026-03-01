@@ -1,4 +1,4 @@
-course_name,_credits,week_day,start_time,duration_minutes,room,lecturer
+course_name,credits,week_day,start_time,duration_minutes,room,lecturer
 63-501 - Atmospheric Dynamics,6,Tuesday,9:15,90,A,Nadjelka
 63-503 - Radiation and Climate,6,Tuesday,12:15,90,B,Stephan
 63-510 - Introduction to Atmospheric Physics,6,Wednesday,9:15,90,C,Juan

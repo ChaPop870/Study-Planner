@@ -21,9 +21,9 @@ class WeekDay(StrEnum):
 
 @dataclass
 class Course:
-    """ One university course."""
+    """One university course."""
     course_name: str
-    credits_: int
+    credits: int
     week_day: WeekDay
     start_time: str
     duration_minutes: int
@@ -33,59 +33,72 @@ class Course:
 
 @dataclass
 class Timetable:
-    """ Timetable containing multiple courses over the week. """
+    """Timetable containing multiple courses over the week."""
     courses: list[Course] = field(default_factory=list)
 
     def add_course(self, course: Course):
+        """Adds a course to the timetable."""
         self.courses.append(course)
 
     def to_df(self) -> pd.DataFrame:
         """Generate dataframe representation of timetable."""
         courses_dict = asdict(self)
         courses_df = pd.DataFrame(courses_dict["courses"]).set_index("course_name")
-        print(courses_df)
         return courses_df
+
+    def __len__(self) -> int:
+        """Return the number of courses in the timetable."""
+        return len(self.courses)
 
 
 class Theme(ABC):
     """Abstract base class for themes"""
+
     @abstractmethod
     def color_list(self, number_of_courses: int) -> list:
         """Creates a list of n colors where n is the number of courses"""
         pass
 
 
-
 class TimetableLayout(ABC):
     """Abstract base class for timetable layouts"""
-    def __init__(self, courses, theme, figsize_timetable, user):
+    def __init__(
+        self,
+        courses: list[Course],
+        theme: Theme,
+        figsize_timetable: tuple[float, float],
+        user: str
+    ):
         self.courses = courses
         self.theme = theme
         self.figsize_timetable = figsize_timetable
         self.user = user
 
-    def calc_yrange_for_plotting(self):
+    def calc_yrange_for_plotting(self) -> np.ndarray:
         """Calculate the time range on the y-axis for plotting."""
-        earliest_time = datetime(year=1900, month=1, day=2, hour=0, minute=0)
-        latest_time = datetime(year=1900, month=1, day=1, hour=0, minute=0)
+        start_minutes = []
+        end_minutes = []
 
         for subject in self.courses:
-            endtime = datetime.combine(datetime.today().date(),
-                                       datetime.time(subject.start_time)) + subject.duration_minutes
-            y = subject.start_time.hour * 60 + subject.start_time.minute  # Any better name that self.y?
+            start: int = minutes_since_midnight(subject.start_time)
+            end: int = minutes_since_midnight(subject.start_time) + subject.duration_minutes
 
-            if subject.start_time < earliest_time:
-                earliest_time = subject.start_time
-            if endtime > latest_time:
-                latest_time = endtime
+            # Detect rollover past midnight
+            if end < start:
+                end += 24 * 60
 
-        y_bounds = [
-            (earliest_time - timedelta(hours=2)).hour,
-            (latest_time + timedelta(hours=2)).hour,
-        ]
-        y_ticks = np.arange(y_bounds[0] * 60, y_bounds[1] * 60 + 1, 60)
+            start_minutes.append(start)
+            end_minutes.append(end)
 
-        return y_bounds, y_ticks
+        earliest_time: int = min(start_minutes) - 120
+        latest_time: int = max(end_minutes) + 120
+
+        earliest_hour: int = (earliest_time // 60) * 60
+        latest_hour: int = ((latest_time + 59) // 60) * 60
+
+        y_ticks = np.arange(earliest_hour, latest_hour + 1, 60)
+
+        return y_ticks
 
     @abstractmethod
     def display_timetable(self):
@@ -103,3 +116,9 @@ class TimetableLayout(ABC):
     def display_courses(self, ax):
         """Plotting the courses into the timetable layout"""
         pass
+
+
+def minutes_since_midnight(date: str) -> int:
+    """Return the number of minutes since midnight"""
+    date_as_datetime = datetime.strptime(date, "%H:%M")
+    return date_as_datetime.hour * 60 + date_as_datetime.minute

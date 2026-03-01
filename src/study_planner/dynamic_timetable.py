@@ -1,15 +1,17 @@
 from datetime import datetime, time, timedelta
 
 import matplotlib.colors as mcolors
+from matplotlib.figure import Figure
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from src.study_planner.timetable import TimetableLayout, WeekDay
+from src.study_planner.timetable import minutes_since_midnight
 
 
 class DynamicTimetable(TimetableLayout):
     """Dynamic Timetable Layout"""
-    def display_timetable(self):
+    def display_timetable(self) -> Figure:
         """Plotting the timetable with courses."""
         height_ratios = [1, 8]
 
@@ -17,7 +19,7 @@ class DynamicTimetable(TimetableLayout):
             2, 1, shared_xaxes=True, vertical_spacing=0, row_heights=height_ratios
         )
         fig.update_layout(title=f"{self.user}'s Study Timetable")
-        fig.update_layout(title_font_color=mcolors.to_hex(self.theme.themecolor),
+        fig.update_layout(title_font_color=mcolors.to_hex(self.theme.theme_color),
                           title_font_shadow="auto")
         fig.update_xaxes(visible=False, col=1, row=2)
         fig.update_xaxes(range=[0, self.figsize_timetable[0] * 100], row=2, col=1)
@@ -26,14 +28,14 @@ class DynamicTimetable(TimetableLayout):
         self.create_timetable_layout(fig)
         self.display_courses(fig)
 
-        return fig.show()
+        return fig
 
     def create_timetable_header(self, fig):
         """Creating timetable header with week days."""
 
         day_width = self.figsize_timetable[0] / len(WeekDay)
         text_offset = [day_width / 2, 1 / 2]
-        # create the days as a header in subplot 1:
+
         for i, day in enumerate(WeekDay):
             fig.add_shape(
                 type="rect",
@@ -45,7 +47,7 @@ class DynamicTimetable(TimetableLayout):
                 yref="y1",
                 row=1,
                 col=1,
-                fillcolor=mcolors.to_hex(self.theme.themecolor)
+                fillcolor=mcolors.to_hex(self.theme.theme_color)
             )
 
             fig.add_annotation(
@@ -55,19 +57,19 @@ class DynamicTimetable(TimetableLayout):
                 showarrow=False,
                 col=1,
                 row=1,
-                font={"color": mcolors.to_hex(self.theme.fontcolor)},
+                font={"color": mcolors.to_hex(self.theme.font_color)},
             )
         fig.update_yaxes(range=[0, 1], visible=False, col=1, row=1)
 
     def create_timetable_layout(self, fig):
         """Creating timetable layout"""
 
-        y_bounds, y_ticks = self.calc_yrange_for_plotting()
-        daylines = [
+        y_ticks = self.calc_yrange_for_plotting()
+        day_lines = [
             i * self.figsize_timetable[0] * 100 / len(WeekDay)
             for i, _ in enumerate(WeekDay)
         ]
-        for x in daylines:
+        for x in day_lines:
             fig.add_shape(
                 type="line",
                 x0=x,
@@ -77,7 +79,7 @@ class DynamicTimetable(TimetableLayout):
                 xref="x2",
                 yref="y2",
                 opacity=0.5,
-                fillcolor=mcolors.to_hex(self.theme.fontcolor),
+                fillcolor=mcolors.to_hex(self.theme.font_color),
                 col=1,
                 row=2,
             )
@@ -85,7 +87,7 @@ class DynamicTimetable(TimetableLayout):
             title_text="Hour",
             range=[max(y_ticks), min(y_ticks)],
             tickvals=y_ticks,
-            ticktext=[f"{int(h / 60):02d}:00" for h in y_ticks],
+            ticktext=[f"{int((h / 60) % 24):02d}:{int(h % 60):02d}" for h in y_ticks],
             row=2,
             col=1,
         )
@@ -101,16 +103,18 @@ class DynamicTimetable(TimetableLayout):
                 day: i * self.figsize_timetable[0] / len(WeekDay) for i, day in enumerate(WeekDay)
             }
             x = day_to_x[subject.week_day]
-            endtime = datetime.combine(datetime.today().date(),
-                                       datetime.time(subject.start_time)) + subject.duration_minutes
-            y = subject.start_time.hour * 60 + subject.start_time.minute  # Any better name that self.y?
+            endtime_minutes = minutes_since_midnight(subject.start_time) + subject.duration_minutes
+            endtime_hours = (endtime_minutes // 60) % 24
+            endtime_minutes_left = endtime_minutes % 60
+            endtime = time(hour = endtime_hours, minute=endtime_minutes_left)
+            y = minutes_since_midnight(subject.start_time)
 
             fig.add_shape(
                 type="rect",
                 x0=x * 100,
                 x1=x * 100 + day_width * 100,
                 y1=y,
-                y0=y + int(subject.duration_minutes.total_seconds() / 60),
+                y0=y + int(subject.duration_minutes),
                 xref="x2",
                 yref="y2",
                 fillcolor=mcolors.to_hex(self.theme.color_list(len(self.courses))[i_subject]),
@@ -119,31 +123,31 @@ class DynamicTimetable(TimetableLayout):
             )
             fig.add_annotation(
                 x=(x * 100 + 0.5 * day_width * 100),
-                y=y + 0.5 * int(subject.duration_minutes.total_seconds() / 60),
+                y=y + 0.5 * int(subject.duration_minutes),
                 text=f"{subject.course_name[:6]}",
                 showarrow=False,
                 col=1,
                 row=2,
-                font={"color": mcolors.to_hex(self.theme.fontcolor)},
+                font={"color": mcolors.to_hex(self.theme.font_color)},
             )
             # add hover info:
             fig.add_trace(
                 go.Scatter(
                     x=[x * 100 + 0.5 * day_width * 100],
-                    y=[y + 0.5 * int(subject.duration_minutes.total_seconds() / 60)],
+                    y=[y + 0.5 * int(subject.duration_minutes)],
                     marker=dict(
-                        size=int(subject.duration_minutes.total_seconds() / 60), opacity=0
+                        size=int(subject.duration_minutes), opacity=0
                     ),
                     mode="markers",
                     hovertemplate=f"<b>{subject.course_name}</b> "
                                   f"<br> {subject.lecturer}"
                                   f"<br> {subject.room}"
-                                  f"<br> {subject.start_time.time()}"
-                                  f"<br> {endtime.time()}"
+                                  f"<br> {subject.start_time}"
+                                  f"<br> {endtime}"
                                   f"<extra></extra>",
                     hoverlabel=dict(bgcolor=mcolors.to_hex(self.theme.color_list(len(self.courses))[i_subject]),
-                                    font_color=mcolors.to_hex(self.theme.fontcolor),
-                                    bordercolor=mcolors.to_hex(self.theme.fontcolor)),
+                                    font_color=mcolors.to_hex(self.theme.font_color),
+                                    bordercolor=mcolors.to_hex(self.theme.font_color)),
                     showlegend=False,
                 ),
                 row=2,
