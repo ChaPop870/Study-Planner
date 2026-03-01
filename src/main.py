@@ -116,8 +116,10 @@ def choose_layout(layout_type, courses, theme, figsize_timetable, user) -> Timet
     """Choose a layout type by name."""
     if layout_type == LayoutType.STATIC:
         return StaticTimetable(courses, theme, figsize_timetable, user)
+
     elif layout_type == LayoutType.DYNAMIC:
         return DynamicTimetable(courses, theme, figsize_timetable, user)
+
     raise ValueError(f"Unknown timetable type: {layout_type}")
 
 
@@ -129,7 +131,6 @@ class TimetableTheme(StrEnum):
     AUTUMN = "autumn"
     NEUTRAL = "neutral"
     NATURE = "nature"
-
 
 
 def choose_theme(theme: TimetableTheme) -> Theme:
@@ -152,10 +153,16 @@ def choose_theme(theme: TimetableTheme) -> Theme:
 def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=True):
     if not auto_generate:
         print(show_welcome())
+
+        user = input("\nWhat is your name? ")
+
         print("The following timetables are available:\n")
+
         timetable_list = available_timetable_list(DATA_DIR)
+
         for i, file in enumerate(timetable_list, start = 1):
             print(f"{i}. {file}")
+
             if i == len(timetable_list):
                 print()
 
@@ -163,7 +170,7 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
         while True:
             try:
-                selection = int(input("Choice: "))
+                selection = int(input("\nChoice: "))
 
                 if selection == -1:
                     print("\nThank you. We hope to see you again!")
@@ -171,16 +178,17 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
                 elif selection == 0:
                     all_users_courses = Timetable()
+
                     while True:
                         users_course = get_user_inputs()
                         all_users_courses.add_course(users_course)
 
                         choice = input("\nAdd another course? (y/n): ")
+
                         if choice != "y":
                             break
 
                     df = all_users_courses.to_df()
-                    # df = prepare_df(df)
                     break
 
                 elif 1 <= selection <= len(timetable_list):
@@ -209,11 +217,11 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
             try:
                 layout_selection = int(input("\nChoice: "))
 
-                if selection == 1:
+                if layout_selection == 1:
                     layout_type = "static"
                     break
 
-                elif selection == 2:
+                elif layout_selection == 2:
                     layout_type = "dynamic"
                     break
 
@@ -241,8 +249,6 @@ def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=Tr
 
             except ValueError:
                 print("Invalid choice. Please try again.")
-
-
 
     else:
         df = load_course_data(filename)
@@ -272,5 +278,5 @@ if __name__ == "__main__":
         theme="autumn",
         figsize_timetable=(8, 6),
         user="Marieke",
-        auto_generate=True
+        auto_generate=False
     )
