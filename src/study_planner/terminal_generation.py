@@ -3,6 +3,7 @@ from src.study_planner.helper_functions import *
 def terminal_generation(
         figsize_timetable: tuple[int, int]
 ):
+    """Generate study-planner using a command line interface."""
     print(show_welcome())
 
     user = input("\nWhat is your name? ")
