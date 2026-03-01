@@ -19,7 +19,7 @@ class DynamicTimetable(TimetableLayout):
             2, 1, shared_xaxes=True, vertical_spacing=0, row_heights=height_ratios
         )
         fig.update_layout(title=f"{self.user}'s Study Timetable")
-        fig.update_layout(title_font_color=mcolors.to_hex(self.theme.themecolor),
+        fig.update_layout(title_font_color=mcolors.to_hex(self.theme.theme_color),
                           title_font_shadow="auto")
         fig.update_xaxes(visible=False, col=1, row=2)
         fig.update_xaxes(range=[0, self.figsize_timetable[0] * 100], row=2, col=1)
@@ -47,7 +47,7 @@ class DynamicTimetable(TimetableLayout):
                 yref="y1",
                 row=1,
                 col=1,
-                fillcolor=mcolors.to_hex(self.theme.themecolor)
+                fillcolor=mcolors.to_hex(self.theme.theme_color)
             )
 
             fig.add_annotation(
@@ -57,7 +57,7 @@ class DynamicTimetable(TimetableLayout):
                 showarrow=False,
                 col=1,
                 row=1,
-                font={"color": mcolors.to_hex(self.theme.fontcolor)},
+                font={"color": mcolors.to_hex(self.theme.font_color)},
             )
         fig.update_yaxes(range=[0, 1], visible=False, col=1, row=1)
 
@@ -79,7 +79,7 @@ class DynamicTimetable(TimetableLayout):
                 xref="x2",
                 yref="y2",
                 opacity=0.5,
-                fillcolor=mcolors.to_hex(self.theme.fontcolor),
+                fillcolor=mcolors.to_hex(self.theme.font_color),
                 col=1,
                 row=2,
             )
@@ -128,7 +128,7 @@ class DynamicTimetable(TimetableLayout):
                 showarrow=False,
                 col=1,
                 row=2,
-                font={"color": mcolors.to_hex(self.theme.fontcolor)},
+                font={"color": mcolors.to_hex(self.theme.font_color)},
             )
             # add hover info:
             fig.add_trace(
@@ -146,8 +146,8 @@ class DynamicTimetable(TimetableLayout):
                                   f"<br> {endtime}"
                                   f"<extra></extra>",
                     hoverlabel=dict(bgcolor=mcolors.to_hex(self.theme.color_list(len(self.courses))[i_subject]),
-                                    font_color=mcolors.to_hex(self.theme.fontcolor),
-                                    bordercolor=mcolors.to_hex(self.theme.fontcolor)),
+                                    font_color=mcolors.to_hex(self.theme.font_color),
+                                    bordercolor=mcolors.to_hex(self.theme.font_color)),
                     showlegend=False,
                 ),
                 row=2,

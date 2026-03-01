@@ -182,7 +182,7 @@ def terminal_generation(
     for i, (subject, row) in enumerate(df.iterrows()):
         course = Course(
             subject,
-            row["credits_"],
+            row["credits"],
             row["week_day"],
             row["start_time"],
             row["duration_minutes"],

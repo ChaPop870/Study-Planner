@@ -17,7 +17,7 @@ def test_get_user_inputs(monkeypatch):
 def test_load_course_data(tmp_path):
     filepath = tmp_path / "file.csv"
     test_dataframe = pd.DataFrame({"course_name": ["Math", "Physics"],
-                                   "credits_": [6,4],
+                                   "credits": [6,4],
                                    "week_day": [WeekDay.MONDAY, WeekDay.TUESDAY],
                                    "start_time": ["09:00", "10:00"],
                                    "duration_minutes": [90, 120],

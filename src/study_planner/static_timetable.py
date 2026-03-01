@@ -37,8 +37,9 @@ class StaticTimetable(TimetableLayout):
                 (i * day_width, 0),
                 day_width,
                 1,
-                edgecolor=self.theme.fontcolor,
-                facecolor=self.theme.themecolor,  # theme.color_list(len(courses))[0],
+                edgecolor=self.theme.font_color,
+                facecolor=self.theme.theme_color,
+                zorder=2
             )
             ax1.add_patch(rec)
 
@@ -57,28 +58,33 @@ class StaticTimetable(TimetableLayout):
         title = ax1.set_title(
             f"{self.user}'s Study Timetable \n",
             fontsize=16,
-            color=self.theme.themecolor,
+            color=self.theme.theme_color,
             fontweight="bold",
         )
         title.set_path_effects([
-            pe.withStroke(linewidth=2, foreground=self.theme.fontcolor)
+            pe.withStroke(linewidth=2, foreground=self.theme.font_color)
         ])
+
 
     def create_timetable_layout(self, ax2: Axes) -> None:
         """Creating timetable layout."""
         y_ticks = self.calc_yrange_for_plotting()
         ax2.set_yticks(y_ticks)
         ax2.set_ylim(y_ticks[0], y_ticks[-1])
+        ax2.set_xlim(0, self.figsize_timetable[0])
         ax2.invert_yaxis()
         ax2.set_yticklabels([f"{int(h / 60 % 24):02d}:00" for h in y_ticks])
         ax2.set_ylabel("Hour")
         ax2.set_xticks([])
+        ax2.set_axisbelow(True)
+        ax2.grid(True, zorder=0)
+
 
     def display_courses(self, ax2: Axes) -> None:
         """Plotting the courses into the timetable layout"""
         day_lines = [i * self.figsize_timetable[0] / len(WeekDay) for i, day in enumerate(WeekDay)]
         for x in day_lines:
-            ax2.axvline(x, color=self.theme.fontcolor, alpha=0.5)
+            ax2.axvline(x, color="gray", alpha=0.3, zorder=1)
 
         for i_subject, subject in enumerate(self.courses):
             width = self.figsize_timetable[0] / len(WeekDay)  # One day wide
@@ -94,12 +100,15 @@ class StaticTimetable(TimetableLayout):
                 width=width,
                 height=height,
                 facecolor=self.theme.color_list(len(self.courses))[i_subject],
-                edgecolor=self.theme.fontcolor,
+                edgecolor=self.theme.font_color,
                 label=subject.course_name,
             )
             ax2.add_patch(period)
             ax2.text(
-                x + width * 0.3, y + height * 0.7, subject.course_name[0:6]
+                x + width * 0.3,
+                y + height * 0.7,
+                subject.course_name[0:6],
+                zorder=3,
             )
 
         ax2.legend()

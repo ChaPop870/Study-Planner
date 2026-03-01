@@ -24,7 +24,7 @@ def layout():
     courses = [
         Course(
             course_name="Math",
-            credits_=5,
+            credits=5,
             week_day=WeekDay.MONDAY,
             start_time="10:00",
             duration_minutes=90,
@@ -33,7 +33,7 @@ def layout():
         ),
         Course(
             course_name="Physics",
-            credits_=4,
+            credits=4,
             week_day=WeekDay.WEDNESDAY,
             start_time="14:00",
             duration_minutes=120,

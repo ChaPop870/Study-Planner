@@ -13,7 +13,7 @@ from src.study_planner.timetable import (
 # Create a few objects
 dynamics = Course(
     course_name="Dynamics",
-    credits_=6,
+    credits=6,
     week_day=WeekDay.TUESDAY,
     start_time="20:35",
     duration_minutes=90,
@@ -23,7 +23,7 @@ dynamics = Course(
 
 math = Course(
     course_name="Mathematics",
-    credits_=3,
+    credits=3,
     week_day=WeekDay("Friday"),
     start_time="9:15",
     duration_minutes=120,
@@ -53,7 +53,7 @@ def test_weekday_invalid_enum_value():
 # Tests for Course Class
 def test_is_valid_attribute():
     assert dynamics.course_name == "Dynamics"
-    assert dynamics.credits_ == 6
+    assert dynamics.credits == 6
     assert dynamics.week_day == WeekDay.TUESDAY
     assert dynamics.start_time == "20:35"
 

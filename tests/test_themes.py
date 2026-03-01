@@ -33,10 +33,10 @@ def test_theme_is_subclass(ThemeClass):
 def test_theme_has_required_attributes(ThemeClass):
     theme = ThemeClass()
 
-    assert hasattr(theme, "themecolor")
-    assert hasattr(theme, "fontcolor")
-    assert isinstance(theme.themecolor, str)
-    assert isinstance(theme.fontcolor, str)
+    assert hasattr(theme, "theme_color")
+    assert hasattr(theme, "font_color")
+    assert isinstance(theme.theme_color, str)
+    assert isinstance(theme.font_color, str)
 
 
 # color_list Behavior

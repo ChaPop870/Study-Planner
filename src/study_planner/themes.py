@@ -8,8 +8,8 @@ class DarkTheme(Theme):
     """Dark theme for the timetable"""
     def __init__(self):
         self.cmap = plt.get_cmap("bone")
-        self.themecolor = "midnightblue"
-        self.fontcolor = "white"
+        self.theme_color = "midnightblue"
+        self.font_color = "white"
 
     def color_list(self, number_of_courses: int) -> list:
         """List of colors for the dark theme"""
@@ -20,8 +20,8 @@ class LightTheme(Theme):
     """Light theme for the timetable"""
     def __init__(self):
         self.cmap = plt.get_cmap("Blues")
-        self.themecolor = "powderblue"
-        self.fontcolor = "black"
+        self.theme_color = "powderblue"
+        self.font_color = "black"
 
     def color_list(self, number_of_courses: int) -> list:
         """List of colors for the light theme"""
@@ -32,8 +32,8 @@ class RainbowTheme(Theme):
     """Rainbow theme for the timetable"""
     def __init__(self):
         self.cmap = plt.get_cmap("rainbow")
-        self.themecolor = "crimson"
-        self.fontcolor = "lightgrey"
+        self.theme_color = "crimson"
+        self.font_color = "lightgrey"
 
     def color_list(self, number_of_courses: int) -> list:
         """List of colors for the rainbow theme"""
@@ -44,8 +44,8 @@ class AutumnTheme(Theme):
     """Autumn theme for the timetable"""
     def __init__(self):
         self.cmap = plt.get_cmap("autumn")
-        self.themecolor = "maroon"
-        self.fontcolor = "white"
+        self.theme_color = "maroon"
+        self.font_color = "white"
 
     def color_list(self, number_of_courses: int) -> list:
         """List of colors for the autumn theme"""
@@ -56,8 +56,8 @@ class NeutralTheme(Theme):
     """Neutral theme for the timetable"""
     def __init__(self):
         self.cmap = plt.get_cmap("copper")
-        self.themecolor = "tan"
-        self.fontcolor = "black"
+        self.theme_color = "tan"
+        self.font_color = "black"
 
     def color_list(self, number_of_courses: int) -> list:
         """List of colors for the neutral theme"""
@@ -68,8 +68,8 @@ class NatureTheme(Theme):
     """Nature theme for the timetable"""
     def __init__(self):
         self.cmap = plt.get_cmap("summer")
-        self.themecolor = "lightgreen"
-        self.fontcolor = "darkslategrey"
+        self.theme_color = "lightgreen"
+        self.font_color = "darkslategrey"
 
     def color_list(self, number_of_courses: int) -> list:
         """List of colors for the nature theme"""
