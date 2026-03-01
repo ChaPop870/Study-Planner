@@ -12,9 +12,9 @@ from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLay
 
 _MAX_MINUTES_IN_A_DAY: int = 1440
 
-BASE_DIR: Path = Path(__file__).resolve().parents[1]
+BASE_DIR = Path(__file__).resolve().parents[1]
 
-DATA_DIR: Path = BASE_DIR / "data"
+DATA_DIR = BASE_DIR / "data"
 
 
 class LayoutType(StrEnum):
@@ -166,7 +166,7 @@ def choose_theme(theme: TimetableTheme) -> Theme:
         raise ValueError(f"Unknown theme: {theme}")
 
 
-def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=True):
+def main(layout_type, filename, theme, figsize_timetable, user, auto_generate=False):
     if not auto_generate:
         print(show_welcome())
 
