@@ -66,20 +66,3 @@ def choose_theme(theme: TimetableTheme) -> Theme:
 
     except KeyError:
         raise ValueError(f"Unknown theme: {theme}")
-
-def show_welcome() -> str:
-    """Prints a welcome message to the user."""
-    return "Welcome to Chavez & Marieke's timetable app!\n"
-
-
-def instructions() -> str:
-    """Prints an instructions message to the user."""
-    return ("To display the desired timetable, press the index of the timetable. \n"
-            "To generate your own timetable, press '0' \n"
-            "To exit the app, press '-1'")
-
-
-def available_timetable_list(directory: Path) -> list[str]:
-    """List the csv files from the given directory"""
-    file_list = [path.name for path in directory.glob("*.csv")]
-    return file_list

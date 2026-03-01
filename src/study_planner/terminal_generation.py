@@ -2,11 +2,7 @@ from datetime import datetime
 from pathlib import Path
 
 from src.study_planner.helper_functions import LayoutType, TimetableTheme
-from src.study_planner.helper_functions import (
-    choose_layout,
-    choose_theme,
-    load_course_data
-)
+from src.study_planner.helper_functions import choose_layout, choose_theme, load_course_data
 from src.study_planner.helper_functions import DATA_DIR, _MAX_MINUTES_IN_A_DAY
 from src.study_planner.timetable import Course, Timetable, WeekDay
 
@@ -54,7 +50,6 @@ def get_user_inputs() -> Course:
     while True:
         start = input("Enter start time (HH:MM) in 24 hour format: ")
         try:
-            # validate format
             datetime.strptime(start, "%H:%M")
             break
         except ValueError:
@@ -81,8 +76,9 @@ def get_user_inputs() -> Course:
 
 def terminal_generation(
         figsize_timetable: tuple[int, int]
-):
+) -> None:
     """Generate study-planner using a command line interface."""
+
     print(show_welcome())
 
     user = input("\nWhat is your name? ")

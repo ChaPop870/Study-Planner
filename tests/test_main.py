@@ -1,5 +1,6 @@
-import pytest
 import pandas as pd
+import pytest
+
 from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
 from src.main import get_user_inputs, load_course_data, available_timetable_list, choose_layout, choose_theme, TimetableTheme
 from study_planner.static_timetable import StaticTimetable

@@ -1,11 +1,3 @@
-from pathlib import Path
-from enum import StrEnum
-
-import pandas as pd
-
-from src.study_planner.static_timetable import StaticTimetable
-from src.study_planner.dynamic_timetable import DynamicTimetable
-from src.study_planner.themes import *
 from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout, Theme
 from src.study_planner.helper_functions import LayoutType, TimetableTheme
 from src.study_planner.helper_functions import load_course_data, choose_layout, choose_theme
@@ -17,7 +9,7 @@ def auto_generation(
     theme,
     figsize_timetable: tuple[int, int],
     user: str,
-):
+) -> None:
     """
     Generate and display a timetable without CLI interaction.
     """
