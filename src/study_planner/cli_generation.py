@@ -32,8 +32,8 @@ def get_user_inputs() -> Course:
 
     while True:
         try:
-            credits_ = int(input("Enter credits: "))
-            if credits_ >= 0:
+            credits = int(input("Enter credits: "))
+            if credits >= 0:
                 break
             else:
                 print("Invalid input. Credits must be a positive integer")
@@ -71,7 +71,7 @@ def get_user_inputs() -> Course:
 
     lecturer = input("Enter lecturer: ")
 
-    return Course(course_name, credits_, week_day, start, duration, room, lecturer)
+    return Course(course_name, credits, week_day, start, duration, room, lecturer)
 
 
 def cli_generation(
