@@ -1,7 +1,7 @@
 import pytest
 
 from src.study_planner.timetable import WeekDay, Course, Timetable, TimetableLayout
-from src.study_planner.cli_generation import get_user_inputs
+from src.study_planner.cli_generation import available_timetable_list ,get_user_inputs
 
 
 def test_get_user_inputs_valid(monkeypatch):
@@ -89,3 +89,15 @@ def test_invalid_duration(monkeypatch):
     result = get_user_inputs()
 
     assert result.duration_minutes == 90
+
+
+def test_filter_csv_files(tmp_path):
+
+    (tmp_path / "file1.csv").touch()
+    (tmp_path / "file2.csv").touch()
+    (tmp_path / "notes.txt").touch()
+    (tmp_path / "to-do-list.pdf").touch()
+
+    result = available_timetable_list(tmp_path)
+
+    assert sorted(result) == ["file1.csv", "file2.csv"]
