@@ -1,7 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from src.study_planner.timetable import Theme
+
+class Theme(ABC):
+    """Abstract base class for themes"""
+
+    @abstractmethod
+    def color_list(self, number_of_courses: int) -> list:
+        """Creates a list of n colors where n is the number of courses"""
+        pass
 
 
 class DarkTheme(Theme):
