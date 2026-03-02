@@ -6,10 +6,8 @@ from src.study_planner.themes import (
     RainbowTheme,
     AutumnTheme,
     NeutralTheme,
-    NatureTheme,
+    NatureTheme, Theme,
 )
-from src.study_planner.timetable import Theme
-
 
 # Helper
 THEME_CLASSES = [

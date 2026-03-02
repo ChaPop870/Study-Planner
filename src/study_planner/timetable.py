@@ -6,6 +6,8 @@ from enum import StrEnum
 import numpy as np
 import pandas as pd
 
+from src.study_planner.themes import Theme
+
 
 class WeekDay(StrEnum):
     """Distinct weekdays by name."""
@@ -49,15 +51,6 @@ class Timetable:
     def __len__(self) -> int:
         """Return the number of courses in the timetable."""
         return len(self.courses)
-
-
-class Theme(ABC):
-    """Abstract base class for themes"""
-
-    @abstractmethod
-    def color_list(self, number_of_courses: int) -> list:
-        """Creates a list of n colors where n is the number of courses"""
-        pass
 
 
 class TimetableLayout(ABC):

@@ -2,7 +2,9 @@ from plotly.graph_objects import Figure
 import pytest
 
 from src.study_planner.dynamic_timetable import DynamicTimetable
-from src.study_planner.timetable import Course, WeekDay, Theme
+from src.study_planner.timetable import Course, WeekDay
+from src.study_planner.themes import Theme
+
 
 class SimpleTheme(Theme):
     fontcolor = "black"

@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pytest
 
 from src.study_planner.static_timetable import StaticTimetable
-from src.study_planner.timetable import Theme
+from src.study_planner.themes import Theme
 from src.study_planner.timetable import Course, WeekDay, Timetable
 
 matplotlib.use("Agg")  # Prevent GUI backend during testing
